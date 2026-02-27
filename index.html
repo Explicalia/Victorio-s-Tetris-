@@ -7,11 +7,11 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#05050f">
-<meta name="description" content="Tetris por Explicalia — El juego de bloques definitivo, diseñado para pantallas de bolsillo.">
+<meta name="description" content="Tetris por Explicalia — El juego de bloques definitivo.">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="format-detection" content="telephone=no">
 <meta property="og:title" content="Tetris · Explicalia">
-<meta property="og:description" content="El juego de bloques definitivo.">
+<meta property="og:description" content="¿Cuántas líneas aguantas sin perder?">
 <meta property="og:type" content="website">
 <link rel="manifest" href="data:application/json,{}">
 <title>Tetris · Explicalia</title>
@@ -20,10 +20,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════════
-   TETRIS · EXPLICALIA SYSTEM — Production v5.0
-   Tested: iPhone SE→15 Pro Max / iPad Mini→Pro 12.9
-           Galaxy S21→S24 / Pixel 6→8 / Android tablets
-           Chrome, Safari, Firefox, Samsung Internet
+   TETRIS · EXPLICALIA — v6.0 Engagement Edition
+   Full responsive: iPhone SE → Desktop 4K
+   Copywriting · Engagement loops · Desktop layout
    ═══════════════════════════════════════════════════ */
 
 :root {
@@ -246,6 +245,25 @@ color: rgba(255,255,255,.27);
 margin-bottom: 9px;
 font-family: var(–f-body);
 }
+
+/* Desktop hover effects */
+@media (hover: hover) {
+.btn:hover { transform: translateY(-1px); box-shadow: 0 1px 0 rgba(255,255,255,.22) inset, 0 8px 28px rgba(0,122,255,.44); }
+.btn.ghost:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); }
+.btn.red:hover { box-shadow: 0 8px 28px rgba(255,45,85,.4); }
+.btn.green:hover { box-shadow: 0 8px 28px rgba(52,199,89,.38); }
+.mc:hover { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.14); }
+}
+
+/* ── Rank badge ── */
+.rank-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 20px; padding: 4px 12px 4px 8px; font-size: .65rem; font-weight: 700; color: rgba(255,255,255,.5); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.rank-badge .rank-ico { font-size: .85rem; }
+
+/* ── Streak pill ── */
+#l-streak { display: none; background: rgba(255,149,0,.12); border: 1px solid rgba(255,149,0,.22); border-radius: 10px; padding: 6px 14px; font-size: .72rem; font-weight: 700; color: var(–orange); text-align: center; margin-bottom: 12px; width: 100%; }
+
+/* ── Dynamic challenge ── */
+#l-challenge { font-size: clamp(.72rem, 1.9vmin, .84rem); color: var(–cyan); font-weight: 600; margin-top: 10px; text-align: center; min-height: 1.2em; opacity: 0; animation: fUp .5s var(–ease-out) .3s both; }
 
 /* ══════════════════════════════════════════
 SCREEN 1 — LANDING
@@ -1227,6 +1245,39 @@ color: rgba(255,255,255,.15);
 .fw-c1 a { color: rgba(255,255,255,.26); text-decoration: none; font-weight: 600; }
 .fw-c2 { font-size: .55rem; color: rgba(255,255,255,.09); margin-top: 2px; }
 
+/* ── Countdown overlay ── */
+#countdown { position: absolute; inset: 0; z-index: 50; background: rgba(5,5,15,.92); display: none; align-items: center; justify-content: center; flex-direction: column; gap: 8px; }
+#countdown.on { display: flex; }
+#cd-num { font-family: var(–f-display); font-size: clamp(4rem, 18vmin, 7rem); font-weight: 900; color: var(–cyan); text-shadow: 0 0 60px rgba(0,212,232,.5); animation: cdPop .35s var(–spring); }
+#cd-label { font-size: clamp(.7rem, 2vmin, .9rem); color: rgba(255,255,255,.35); text-transform: uppercase; letter-spacing: 3px; font-weight: 600; }
+@keyframes cdPop { from { transform: scale(2.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+/* ── Near record alert ── */
+#near-rec { position: absolute; top: 0; left: 0; right: 0; z-index: 40; text-align: center; padding: 2px; font-size: .6rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(–orange); background: linear-gradient(90deg, transparent, rgba(255,149,0,.15), transparent); opacity: 0; transition: opacity .3s; pointer-events: none; }
+#near-rec.on { opacity: 1; animation: nearPulse 1.2s ease infinite; }
+@keyframes nearPulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+
+/* ── Challenge HUD ── */
+#challenge-hud { position: absolute; bottom: 0; left: 0; right: 0; z-index: 40; text-align: center; padding: 3px 8px; font-size: .55rem; font-weight: 600; color: rgba(255,255,255,.3); background: linear-gradient(0deg, rgba(5,5,15,.6), transparent); pointer-events: none; display: none; }
+#challenge-hud.on { display: block; }
+
+/* ── Score glow when near record ── */
+.hp.glow-rec { border-color: rgba(255,149,0,.5); box-shadow: 0 0 12px rgba(255,149,0,.2); }
+#board.near-glow { border-color: rgba(255,149,0,.4); box-shadow: 0 0 0 1px rgba(255,149,0,.15), 0 0 55px rgba(255,100,0,.15), inset 0 0 35px rgba(0,0,0,.5); }
+
+/* ── Milestone feedback ── */
+.fb-msg { font-size: clamp(.56rem, 1.5vmin, .68rem); padding: 3px 11px; border-radius: 20px; color: #fff; background: linear-gradient(90deg, rgba(255,255,255,.12), rgba(255,255,255,.06)); border: 1px solid rgba(255,255,255,.12); animation: fbSlide 1.1s var(–spring) forwards; left: 50%; transform: translateX(-50%); white-space: nowrap; }
+
+/* ── Delta text (game over) ── */
+#go-delta { font-size: .76rem; font-weight: 700; text-align: center; margin-bottom: clamp(10px, 2.5vmin, 16px); min-height: 1.1em; animation: fUp .4s var(–ease-out) .52s both; }
+#go-hook { font-size: .68rem; color: rgba(255,255,255,.3); text-align: center; margin-bottom: 14px; animation: fUp .4s var(–ease-out) .6s both; }
+
+/* ── Desktop keyboard hints (hidden mobile) ── */
+#kb-hints { display: none; }
+
+/* ── Desktop stats panel (hidden mobile) ── */
+#desk-stats { display: none; }
+
 /* Particles */
 .ptc {
 position: fixed;
@@ -1328,8 +1379,31 @@ margin-right: auto;
 #hud { padding-top: calc(env(safe-area-inset-top, 0px) + clamp(2px, .5vmin, 4px)); }
 #gctrl { padding-bottom: calc(env(safe-area-inset-bottom, 0px) + clamp(4px, 1vmin, 8px)); }
 }
-</style>
 
+/* ═══════════════════════════════════
+DESKTOP — ≥1200px with mouse
+═══════════════════════════════════ */
+@media (min-width: 1200px) and (hover: hover) and (pointer: fine) {
+#gctrl { display: none !important; }
+.hint { display: none !important; }
+#kb-hints { display: flex; flex-direction: column; gap: 5px; margin-top: 8px; }
+.kh-row { display: flex; align-items: center; gap: 8px; font-size: .68rem; color: rgba(255,255,255,.35); }
+.kh-key { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); border-radius: 6px; padding: 3px 8px; font-size: .6rem; font-weight: 700; color: rgba(255,255,255,.5); font-family: var(–f-body); min-width: 28px; text-align: center; }
+.gside { width: 100px !important; }
+.gbox { padding: 8px 6px; }
+.gbl { font-size: .55rem; }
+#gmain { padding: 8px 24px; gap: 12px; align-items: center; }
+#desk-stats { display: flex !important; flex-direction: column; gap: 6px; width: 140px; flex-shrink: 0; }
+.ds-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07); border-radius: 12px; padding: 10px; text-align: center; }
+.ds-l { font-size: .5rem; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: rgba(255,255,255,.22); margin-bottom: 3px; }
+.ds-v { font-family: var(–f-display); font-size: 1rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.m-sheet { max-width: 560px; margin: 0 auto; border-radius: 20px; max-height: 80vh; border-bottom: 1px solid rgba(255,255,255,.1); }
+#s2 { justify-content: center; align-items: center; }
+.l-wrap { max-width: 560px; }
+.pcard { max-width: 380px; }
+}
+
+</style>
 </head>
 <body>
 
@@ -1365,35 +1439,38 @@ margin-right: auto;
     <h1 class="brand-t">TETRIS</h1>
     <div class="brand-by">por</div>
     <div class="brand-n">Explicalia</div>
-    <p class="brand-tag">El juego de bloques definitivo,<br>diseñado para pantallas de bolsillo.</p>
+    <p class="brand-tag">Siete piezas. Infinitas decisiones.<br>¿Cuántas líneas aguantas?</p>
+    <div id="l-challenge"></div>
   </div>
 
+  <div id="l-rank" class="rank-badge" style="display:none"><span class="rank-ico"></span><span id="l-rank-t"></span></div>
+  <div id="l-streak"></div>
   <div class="l-stats" role="group" aria-label="Estadísticas">
     <div class="ls"><div class="ls-l">Tu récord</div>
       <div class="ls-v" id="l-hi" style="color:var(--orange)">—</div></div>
     <div class="ls"><div class="ls-l">Partidas</div>
       <div class="ls-v" id="l-gm" style="color:var(--purple)">—</div></div>
-    <div class="ls"><div class="ls-l">Líneas</div>
+    <div class="ls"><div class="ls-l">Líneas totales</div>
       <div class="ls-v" id="l-li" style="color:var(--green)">—</div></div>
   </div>
 
   <div class="mode-g" role="radiogroup" aria-label="Modo de juego">
-    <div class="slbl">Modo de juego</div>
+    <div class="slbl">Elige tu desafío</div>
     <div class="mode-grid">
       <div class="mc on" data-m="marathon" role="radio" aria-checked="true" tabindex="0" onclick="UI.mode(this,'marathon')">
-        <span class="mi" aria-hidden="true">♾</span><div class="mn">Maratón</div><div class="md">Sin límite · sube niveles</div></div>
+        <span class="mi" aria-hidden="true">♾</span><div class="mn">Maratón</div><div class="md">Sobrevive. Sube. Domina.</div></div>
       <div class="mc" data-m="sprint" role="radio" aria-checked="false" tabindex="0" onclick="UI.mode(this,'sprint')">
-        <span class="mi" aria-hidden="true">⚡</span><div class="mn">Sprint 40L</div><div class="md">Más rápido del mundo</div></div>
+        <span class="mi" aria-hidden="true">⚡</span><div class="mn">Sprint 40L</div><div class="md">40 líneas. Sin excusas.</div></div>
       <div class="mc" data-m="ultra" role="radio" aria-checked="false" tabindex="0" onclick="UI.mode(this,'ultra')">
-        <span class="mi" aria-hidden="true">⏱</span><div class="mn">Ultra 2min</div><div class="md">Máxima puntuación</div></div>
+        <span class="mi" aria-hidden="true">⏱</span><div class="mn">Ultra 2min</div><div class="md">120 segundos. Cada bloque cuenta.</div></div>
       <div class="mc" data-m="blitz" role="radio" aria-checked="false" tabindex="0" onclick="UI.mode(this,'blitz')">
-        <span class="mi" aria-hidden="true">🔥</span><div class="mn">Blitz 3min</div><div class="md">Velocidad creciente</div></div>
+        <span class="mi" aria-hidden="true">🔥</span><div class="mn">Blitz 3min</div><div class="md">La velocidad no perdona.</div></div>
     </div>
   </div>
 
   <div class="l-ctas">
-    <button class="btn" onclick="UI.play()" aria-label="Iniciar juego">Jugar ahora</button>
-    <button class="btn ghost" onclick="UI.openManual()" aria-label="Abrir manual">📖 &nbsp; Cómo se juega</button>
+    <button class="btn" onclick="UI.play()" aria-label="Empezar partida">Empezar partida</button>
+    <button class="btn ghost" onclick="UI.openManual()" aria-label="Domina los controles">Domina los controles</button>
   </div>
 
   <footer class="l-foot">
@@ -1517,6 +1594,8 @@ margin-right: auto;
      ╚══════════════════════════════════╝ -->
 
 <div class="scr" id="s3" role="application" aria-label="Tetris">
+  <div id="countdown"><div id="cd-num"></div><div id="cd-label"></div></div>
+  <div id="near-rec">→ CERCA DEL RÉCORD ←</div>
   <div id="hud">
     <div class="hp" id="hsc"><div class="hp-l">Puntos</div><div class="hp-v" id="hv-sc">0</div></div>
     <div class="hp" id="hli"><div class="hp-l">Líneas</div><div class="hp-v" id="hv-li">0</div></div>
@@ -1531,6 +1610,13 @@ margin-right: auto;
         <div class="gbl">HOLD</div>
         <canvas class="gcv" id="cv-h" width="46" height="36" aria-label="Pieza guardada"></canvas>
       </div>
+      <div id="kb-hints">
+        <div class="kh-row"><span class="kh-key">← →</span> mover</div>
+        <div class="kh-row"><span class="kh-key">↑</span> rotar</div>
+        <div class="kh-row"><span class="kh-key">SPC</span> drop</div>
+        <div class="kh-row"><span class="kh-key">C</span> hold</div>
+        <div class="kh-row"><span class="kh-key">ESC</span> pausa</div>
+      </div>
     </div>
     <div id="bwrap">
       <div id="board">
@@ -1542,6 +1628,12 @@ margin-right: auto;
         <div class="gbl" style="margin-bottom:3px;">NEXT</div>
         <canvas class="gcv" id="cv-n" width="46" height="210" aria-label="Próximas piezas"></canvas>
       </div>
+    </div>
+    <div id="desk-stats">
+      <div class="ds-card"><div class="ds-l">Combo máx</div><div class="ds-v" id="ds-combo" style="color:var(--yellow)">0</div></div>
+      <div class="ds-card"><div class="ds-l">T-Spins</div><div class="ds-v" id="ds-tspin" style="color:var(--purple)">0</div></div>
+      <div class="ds-card"><div class="ds-l">Tetris</div><div class="ds-v" id="ds-tetris" style="color:var(--cyan)">0</div></div>
+      <div class="ds-card"><div class="ds-l">Racha</div><div class="ds-v" id="ds-streak" style="color:var(--orange)">0</div></div>
     </div>
   </div>
 
@@ -1588,6 +1680,7 @@ margin-right: auto;
       <div class="go-e" id="go-e" aria-hidden="true">💀</div>
       <div class="go-t">GAME<br>OVER</div>
       <div class="go-q" id="go-q"></div>
+      <div id="go-delta"></div>
       <div class="go-sb">
         <div class="gl">Puntuación final</div>
         <div class="gv" id="go-sc">0</div>
@@ -1598,9 +1691,10 @@ margin-right: auto;
         <div class="go-s"><div class="go-sl">Nivel</div><div class="go-sv" id="go-lv" style="color:var(--yellow)">1</div></div>
         <div class="go-s"><div class="go-sl">Récord</div><div class="go-sv" id="go-hi" style="color:var(--orange)">0</div></div>
       </div>
+      <div id="go-hook"></div>
       <div class="go-ct">
-        <button class="btn red" onclick="UI.retry()">Jugar de nuevo</button>
-        <button class="btn ghost" onclick="UI.farewell()">Volver al menú</button>
+        <button class="btn red" onclick="UI.retry()">Revancha</button>
+        <button class="btn ghost" onclick="UI.toLanding()">Volver al menú</button>
       </div>
     </div>
   </div>
@@ -1621,7 +1715,7 @@ margin-right: auto;
         <div class="fw-hv" id="fw-hi">—</div>
       </div>
       <div class="fw-ct">
-        <button class="btn green" onclick="UI.play()">Jugar otra vez</button>
+        <button class="btn green" onclick="UI.play()">Una más</button>
         <button class="btn ghost" onclick="UI.toLanding()">Volver al inicio</button>
       </div>
       <div class="fw-cr">
@@ -1637,9 +1731,9 @@ margin-right: auto;
 <script>
 'use strict';
 /* ══════════════════════════════════════════
-   TETRIS · EXPLICALIA — Engine v5.0 (Production)
-   All bugs fixed, performance optimized,
-   comprehensive error handling.
+   TETRIS · EXPLICALIA — Engine v6.0 (Engagement Edition)
+   Countdown, near-record, streaks, ranks,
+   desktop layout, milestones, challenges.
    ══════════════════════════════════════════ */
 
 const COLS = 10, ROWS = 20;
@@ -1673,6 +1767,28 @@ const KI = [
 
 /* Gravity values per level (ms per drop) */
 const GV = [800, 720, 630, 550, 470, 380, 300, 220, 150, 100, 80, 70, 60, 55, 50];
+
+/* Milestones */
+const MILESTONES = [
+  {at:1,msg:'¡Así se empieza!'},{at:5,msg:'Calentando motores…'},
+  {at:10,msg:'Esto se pone serio.'},{at:20,msg:'Nivel de veterano.'},
+  {at:30,msg:'¡Máquina imparable!'},{at:40,msg:'Sprint completado…'}
+];
+
+/* Ranks by total lines */
+const RANKS = [
+  {min:0,name:'Novato',ico:'🟢'},{min:100,name:'Aprendiz',ico:'🔵'},
+  {min:500,name:'Estratega',ico:'🟣'},{min:1500,name:'Maestro',ico:'🟡'},
+  {min:5000,name:'Leyenda',ico:'🔴'},{min:15000,name:'Mito',ico:'👑'}
+];
+function getRank(totalLines) {
+  let r = RANKS[0];
+  for (const rk of RANKS) if (totalLines >= rk.min) r = rk;
+  return r;
+}
+
+/* Session streak */
+let SESSION_STREAK = 0;
 
 /* Sarcasm banks */
 const GO_B = [
@@ -1708,10 +1824,18 @@ const DB = {
   hi()   { return parseInt(this._get('ex_hi') || '0'); },
   gm()   { return parseInt(this._get('ex_gm') || '0'); },
   li()   { return parseInt(this._get('ex_li') || '0'); },
-  save(sc, li) {
+  lastSc() { return parseInt(this._get('ex_last') || '0'); },
+  bestCombo() { return parseInt(this._get('ex_bc') || '0'); },
+  totalTspins() { return parseInt(this._get('ex_ts') || '0'); },
+  totalTetris() { return parseInt(this._get('ex_tt') || '0'); },
+  save(sc, li, combo, tspins, tetrisCount) {
     if (sc > this.hi()) this._set('ex_hi', sc);
+    if (combo > this.bestCombo()) this._set('ex_bc', combo);
+    this._set('ex_last', sc);
     this._set('ex_gm', this.gm() + 1);
     this._set('ex_li', this.li() + li);
+    this._set('ex_ts', this.totalTspins() + tspins);
+    this._set('ex_tt', this.totalTetris() + tetrisCount);
   }
 };
 
@@ -1802,6 +1926,25 @@ function refreshLanding() {
   if (hi) hi.textContent = h > 0 ? h.toLocaleString() : '—';
   if (gm) gm.textContent = g > 0 ? g.toLocaleString() : '—';
   if (li) li.textContent = l > 0 ? l.toLocaleString() : '—';
+  // Rank
+  const rank = getRank(l);
+  const rb = document.getElementById('l-rank');
+  if (l > 0 && rb) {
+    rb.style.display = 'inline-flex';
+    document.getElementById('l-rank-t').textContent = rank.name;
+    rb.querySelector('.rank-ico').textContent = rank.ico;
+  }
+  // Streak
+  const sk = document.getElementById('l-streak');
+  if (SESSION_STREAK > 1 && sk) { sk.style.display = 'block'; sk.textContent = '\u{1F525} Racha: ' + SESSION_STREAK + ' partidas esta sesión'; }
+  else if (sk) sk.style.display = 'none';
+  // Dynamic challenge
+  const ch = document.getElementById('l-challenge');
+  if (ch) {
+    if (g === 0) ch.textContent = 'Tu historia empieza aquí.';
+    else if (h > 0) ch.textContent = '\u00bfPuedes superar los ' + h.toLocaleString() + ' puntos?';
+    else ch.textContent = 'Cada partida es una oportunidad.';
+  }
 }
 refreshLanding();
 
@@ -1821,7 +1964,7 @@ const UI = {
     rainOn = false;
     go('s3');
     requestWakeLock();
-    setTimeout(() => { resizeBoard(); G.start(); }, 60);
+    setTimeout(() => { resizeBoard(); G.startWithCountdown(); }, 60);
   },
   openManual() { go('s2'); },
   closeManual() { go('s1'); },
@@ -1829,12 +1972,12 @@ const UI = {
     rainOn = false;
     go('s3');
     requestWakeLock();
-    setTimeout(() => { resizeBoard(); G.start(); }, 60);
+    setTimeout(() => { resizeBoard(); G.startWithCountdown(); }, 60);
   },
   retry() {
     go('s3');
     requestWakeLock();
-    setTimeout(() => { resizeBoard(); G.start(); }, 60);
+    setTimeout(() => { resizeBoard(); G.startWithCountdown(); }, 60);
   },
   quitFarewell() {
     if (G) { G.running = false; if (G.raf) cancelAnimationFrame(G.raf); }
@@ -1850,7 +1993,7 @@ const UI = {
     if (fwE) fwE.textContent = fw.e;
     if (fwQ) fwQ.textContent = fw.q;
     const h = DB.hi();
-    if (fwH) fwH.textContent = h > 0 ? h.toLocaleString() : '—';
+    if (fwH) fwH.textContent = h > 0 ? h.toLocaleString() : '\u2014';
     go('s6');
   },
   toLanding() { rainOn = true; refreshLanding(); go('s1'); }
@@ -1885,14 +2028,16 @@ function resizeBoard() {
   const hudEl = document.getElementById('hud');
   const ctrlEl = document.getElementById('gctrl');
   const sideEl = document.querySelector('.gside');
-  if (!hudEl || !ctrlEl) return;
+  if (!hudEl) return;
 
   const hud = hudEl.getBoundingClientRect();
-  const ctrl = ctrlEl.getBoundingClientRect();
+  const ctrlH = ctrlEl && ctrlEl.offsetParent !== null ? ctrlEl.getBoundingClientRect().height : 0;
   const sideW = sideEl ? sideEl.getBoundingClientRect().width : 50;
+  const deskStats = document.getElementById('desk-stats');
+  const deskW = deskStats && deskStats.offsetParent !== null ? deskStats.getBoundingClientRect().width + 12 : 0;
   const W = window.innerWidth, H = window.innerHeight;
-  const availH = H - hud.height - ctrl.height - 14;
-  const availW = W - (sideW + 5) * 2 - 18;
+  const availH = H - hud.height - ctrlH - 14;
+  const availW = W - (sideW + 5) * 2 - 18 - deskW;
   const cH = Math.floor(availH / ROWS), cW = Math.floor(availW / COLS);
   CELL = Math.max(12, Math.min(cH, cW));
 
@@ -1952,6 +2097,9 @@ class SFX {
   over()   { [400,350,300,250,200].forEach((f, i) => setTimeout(() => this._t(f, 'sawtooth', .35, .12), i * 110)); }
   lvlup()  { [784,880,1047].forEach((f, i) => setTimeout(() => this._t(f, 'sine', .18, .18), i * 90)); }
   combo(n) { this._t(200 + n * 50, 'triangle', .09, .11); }
+  countdown() { this._t(440, 'sine', .12, .12); }
+  countdownGo() { [523,659,784].forEach((f, i) => setTimeout(() => this._t(f, 'sine', .14, .16), i * 40)); }
+  newRecord() { [784,988,1175,1319].forEach((f, i) => setTimeout(() => this._t(f, 'sine', .2, .18), i * 80)); }
 }
 
 function hap(d = 7) {
@@ -1994,6 +2142,27 @@ class Engine {
     });
   }
 
+  startWithCountdown() {
+    this.sfx.init();
+    const cd = document.getElementById('countdown'), num = document.getElementById('cd-num'), lbl = document.getElementById('cd-label');
+    if (!cd || !num) return this.start();
+    cd.classList.add('on');
+    const steps = ['3', '2', '1', 'GO'];
+    let i = 0;
+    const tick = () => {
+      if (i < steps.length) {
+        num.textContent = steps[i];
+        num.style.color = i < 3 ? 'var(--cyan)' : 'var(--green)';
+        lbl.textContent = i < 3 ? 'Prepárate' : '';
+        num.style.animation = 'none'; void num.offsetWidth; num.style.animation = 'cdPop .35s var(--spring)';
+        if (i < 3) this.sfx.countdown(); else this.sfx.countdownGo();
+        hap(i < 3 ? 5 : 15);
+        i++; setTimeout(tick, i <= 3 ? 700 : 400);
+      } else { cd.classList.remove('on'); this.start(); }
+    };
+    tick();
+  }
+
   start() {
     this.sfx.init();
     this.running = true;
@@ -2009,7 +2178,14 @@ class Engine {
     this.tspin_ = null;
     this.mode_ = MODE;
     this.modeT = 0;
-    this.blitzLv = 1; // for blitz speed increase
+    this.blitzLv = 1;
+    // Engagement tracking
+    this.maxCombo = 0; this.tspinCount = 0; this.tetrisCount = 0;
+    this.nearRecShown = false; this._recordBeaten = false; this.lastMilestone = 0;
+    this.holdCount_ = 0;
+    // Reset near-record UI
+    const nr = document.getElementById('near-rec'), bd = document.getElementById('board'), hsc = document.getElementById('hsc');
+    if (nr) nr.classList.remove('on'); if (bd) bd.classList.remove('near-glow'); if (hsc) hsc.classList.remove('glow-rec');
     this._fillQ(); this._spawn(); this._ui(); this._modeLbl();
     go('s3'); CUR = 's3';
     if (this.raf) cancelAnimationFrame(this.raf);
@@ -2164,6 +2340,9 @@ class Engine {
       this.combo++;
 
       if (this.combo > 0) { pts += 50 * this.combo * effectiveLv; this.sfx.combo(this.combo); }
+      if (this.combo > this.maxCombo) this.maxCombo = this.combo;
+      if (n === 4) this.tetrisCount++;
+      if (ts === 'n') this.tspinCount++;
 
       const ac = this.board.every(r => r.every(v => !v));
       if (ac) { pts += 3500 * effectiveLv; this.sfx.allcl(); }
@@ -2179,6 +2358,13 @@ class Engine {
       if (ts) this._fbEl('fb-tspin', ts === 'n' ? `T-SPIN ${['','SINGLE','DOUBLE','TRIPLE'][n] || ''}` : 'T-SPIN MINI', '40%');
       if (ac) this._fbEl('fb-ac', '✦ ALL CLEAR ✦', '18%');
       this._shake(); this._ptcs();
+
+      // Milestones
+      for (const ms of MILESTONES) {
+        if (this.li >= ms.at && this.lastMilestone < ms.at) {
+          this.lastMilestone = ms.at; this._fbEl('fb-msg', ms.msg, '50%'); break;
+        }
+      }
 
       // Level up
       const nl = Math.floor(this.li / 10) + 1;
@@ -2200,6 +2386,21 @@ class Engine {
       }
 
       if (this.mode_ === 'sprint' && this.li >= 40) this._end();
+
+      // Near record check
+      if (this.hi > 0 && this.sc >= this.hi * .8 && !this.nearRecShown) {
+        this.nearRecShown = true;
+        const nrEl = document.getElementById('near-rec'), bdEl = document.getElementById('board'), hscEl = document.getElementById('hsc');
+        if (nrEl) nrEl.classList.add('on'); if (bdEl) bdEl.classList.add('near-glow'); if (hscEl) hscEl.classList.add('glow-rec');
+      }
+      // New record mid-game
+      if (this.sc > this.hi && this.hi > 0 && !this._recordBeaten) {
+        this._recordBeaten = true; this.sfx.newRecord(); hap(30);
+        this._fbEl('fb-ac', '\u2605 NUEVO RÉCORD \u2605', '15%');
+      }
+
+      // Update desktop stats
+      this._deskStats();
 
       animateScore(document.getElementById('hv-sc'));
       this._ui();
@@ -2274,6 +2475,14 @@ class Engine {
     }
   }
 
+  _deskStats() {
+    const $ = id => document.getElementById(id);
+    if ($('ds-combo')) $('ds-combo').textContent = this.maxCombo;
+    if ($('ds-tspin')) $('ds-tspin').textContent = this.tspinCount;
+    if ($('ds-tetris')) $('ds-tetris').textContent = this.tetrisCount;
+    if ($('ds-streak')) $('ds-streak').textContent = SESSION_STREAK;
+  }
+
   hold() {
     if (!this.canHold) return;
     const cur = this.piece.t;
@@ -2286,6 +2495,7 @@ class Engine {
       this._spawn();
     }
     this.canHold = false;
+    this.holdCount_ = (this.holdCount_ || 0) + 1;
     this.sfx.hold(); hap(10);
     this.sides(); this.draw();
   }
@@ -2312,28 +2522,47 @@ class Engine {
     if (this.raf) cancelAnimationFrame(this.raf);
     this.sfx.over(); hap(45);
     releaseWakeLock();
+    SESSION_STREAK++;
 
+    const prevSc = DB.lastSc();
     const newHi = this.sc > this.hi;
     if (newHi) this.hi = this.sc;
-    DB.save(this.sc, this.li);
+    DB.save(this.sc, this.li, this.maxCombo, this.tspinCount, this.tetrisCount);
     this.hi = DB.hi();
 
-    const q = GO_B[0 | Math.random() * GO_B.length];
-    const goE = document.getElementById('go-e');
-    const goQ = document.getElementById('go-q');
-    const goSc = document.getElementById('go-sc');
-    const goLi = document.getElementById('go-li');
-    const goLv = document.getElementById('go-lv');
-    const goHi = document.getElementById('go-hi');
-    const nrec = document.getElementById('nrec');
+    // Clean up in-game overlays
+    const nrEl = document.getElementById('near-rec'), bdEl = document.getElementById('board'), hscEl = document.getElementById('hsc');
+    if (nrEl) nrEl.classList.remove('on'); if (bdEl) bdEl.classList.remove('near-glow'); if (hscEl) hscEl.classList.remove('glow-rec');
 
-    if (goE) goE.textContent = q.e;
-    if (goQ) goQ.textContent = q.q;
-    if (goSc) goSc.textContent = this.sc.toLocaleString();
-    if (goLi) goLi.textContent = this.li;
-    if (goLv) goLv.textContent = this.lv;
-    if (goHi) goHi.textContent = this.hi.toLocaleString();
-    if (nrec) nrec.style.display = newHi ? 'block' : 'none';
+    const $ = id => document.getElementById(id);
+    const q = GO_B[0 | Math.random() * GO_B.length];
+    if ($('go-e')) $('go-e').textContent = q.e;
+    if ($('go-q')) $('go-q').textContent = q.q;
+    if ($('go-sc')) $('go-sc').textContent = this.sc.toLocaleString();
+    if ($('go-li')) $('go-li').textContent = this.li;
+    if ($('go-lv')) $('go-lv').textContent = this.lv;
+    if ($('go-hi')) $('go-hi').textContent = this.hi.toLocaleString();
+    if ($('nrec')) $('nrec').style.display = newHi ? 'block' : 'none';
+
+    // Delta vs previous
+    const delta = $('go-delta');
+    if (delta && prevSc > 0) {
+      const diff = this.sc - prevSc;
+      if (diff > 0) { delta.style.color = 'var(--green)'; delta.textContent = '\u25B2 +' + diff.toLocaleString() + ' pts vs tu anterior'; }
+      else if (diff < 0) { delta.style.color = 'var(--red)'; delta.textContent = '\u25BC ' + diff.toLocaleString() + ' pts vs tu anterior'; }
+      else { delta.style.color = 'rgba(255,255,255,.3)'; delta.textContent = 'Misma puntuación que la anterior'; }
+    } else if (delta) { delta.textContent = ''; }
+
+    // Motivational hook
+    const hook = $('go-hook');
+    if (hook) {
+      let h = '';
+      if (!newHi && this.hi > 0) { const diff = this.hi - this.sc; if (diff < this.hi * .3) h = 'Solo te faltaron ' + diff.toLocaleString() + ' puntos para tu récord.'; }
+      if (!h && this.maxCombo > 1) h = 'Tu mejor combo fue ' + this.maxCombo + '\u00D7. \u00bfPuedes superarlo?';
+      if (!h && SESSION_STREAK > 1) h = 'Llevas ' + SESSION_STREAK + ' partidas. \u00a1No pares!';
+      if (!h) h = 'El 80% de jugadores mejoran en la siguiente partida.';
+      hook.textContent = h;
+    }
 
     refreshLanding();
     setTimeout(() => go('s5'), 650);

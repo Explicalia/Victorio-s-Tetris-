@@ -20,7 +20,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════════
-   TETRIS · EXPLICALIA — v8.0 Brand + Gamepad Edition
+   TETRIS · EXPLICALIA — v9.1 GameBoy + Branding Edition
    Full responsive: iPhone SE → Desktop 4K
    Copywriting · Engagement loops · Desktop layout
    ═══════════════════════════════════════════════════ */
@@ -220,12 +220,12 @@ box-shadow: 0 2px 8px rgba(0,122,255,.22);
 }
 .btn.ghost {
 background: rgb(22,22,40);
-border: 1px solid var(–glass-border);
+border: 1px solid rgb(24,24,40);
 box-shadow: none;
 color: rgba(255,255,255,.68);
 font-weight: 600;
 }
-.btn.ghost:active { background: rgba(255,255,255,.1); }
+.btn.ghost:active { background: rgb(32,32,56); }
 .btn.red {
 background: linear-gradient(135deg, var(–pink), var(–purple));
 box-shadow: 0 5px 18px rgba(255,45,85,.3);
@@ -479,9 +479,7 @@ margin-top: 2px;
 SCREEN 2 — MANUAL (bottom sheet)
 ══════════════════════════════════════════ */
 #s2 {
-background: rgba(0,0,0,.78);
-backdrop-filter: blur(10px);
--webkit-backdrop-filter: blur(10px);
+background: rgb(2,2,6);
 justify-content: flex-end;
 }
 
@@ -650,8 +648,8 @@ flex-shrink: 0;
 .hp {
 flex: 1;
 text-align: center;
-background: var(–surface-light);
-border: 1px solid var(–glass-border);
+background: rgb(18,18,36);
+border: 1px solid rgb(30,30,48);
 border-radius: 14px;
 padding: 6px 8px;
 min-width: 0;
@@ -721,16 +719,14 @@ flex-direction: column;
 gap: 4px;
 }
 .gbox {
-background: var(–surface);
-border: 1px solid var(–glass-border);
+background: rgb(22,22,42);
+border: 1px solid rgb(32,32,52);
 border-radius: 16px;
 padding: clamp(3px, .7vmin, 6px) clamp(2px, .5vmin, 5px);
 display: flex;
 flex-direction: column;
 align-items: center;
 gap: 3px;
-backdrop-filter: var(–blur);
--webkit-backdrop-filter: var(–blur);
 }
 .gbl {
 font-size: clamp(.4rem, 1vmin, .5rem);
@@ -926,8 +922,8 @@ font-size: clamp(.56rem, 1.5vmin, .68rem);
 letter-spacing: 2px;
 text-transform: uppercase;
 color: rgba(255,255,255,.35);
-background: var(–surface-light);
-border: 1px solid var(–glass-border);
+background: rgb(18,18,36);
+border: 1px solid rgb(28,28,46);
 }
 .hint {
 text-align: center;
@@ -943,22 +939,22 @@ padding: 2px 0;
 display: flex;
 align-items: center;
 justify-content: space-between;
-padding: 0 clamp(8px, 2vmin, 16px);
-gap: clamp(16px, 4vmin, 32px);
+padding: 0 clamp(10px, 2.5vmin, 18px);
 }
+/* ── D-PAD: connected cross ── */
 .dpad {
-–ds: clamp(40px, 10.5vmin, 52px);
+–ds: clamp(44px, 11vmin, 54px);
 display: grid;
 grid-template-columns: var(–ds) var(–ds) var(–ds);
 grid-template-rows: var(–ds) var(–ds) var(–ds);
-gap: 2px;
+gap: 0;
 flex-shrink: 0;
 }
 .dp {
-background: linear-gradient(180deg, rgba(40,40,65,.95), rgba(22,22,42,.95));
-border: 1px solid rgba(255,255,255,.07);
-color: rgba(255,255,255,.45);
-font-size: clamp(.7rem, 2vmin, .9rem);
+background: rgb(28,28,48);
+border: 1px solid rgba(255,255,255,.06);
+color: rgba(255,255,255,.5);
+font-size: clamp(.75rem, 2vmin, .95rem);
 font-family: var(–f-body);
 display: flex;
 align-items: center;
@@ -966,58 +962,52 @@ justify-content: center;
 cursor: pointer;
 -webkit-user-select: none;
 user-select: none;
-position: relative;
-box-shadow: 0 2px 0 rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.04);
-transition: background .06s, transform .06s;
+box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+transition: background .06s;
+border-radius: 0;
+padding: 0;
 }
-.dp:active { background: rgba(255,255,255,.12); transform: scale(.94); box-shadow: none; }
-.dp-u { grid-column: 2; grid-row: 1; border-radius: 12px 12px 2px 2px; }
-.dp-l { grid-column: 1; grid-row: 2; border-radius: 12px 2px 2px 12px; }
-.dp-r { grid-column: 3; grid-row: 2; border-radius: 2px 12px 12px 2px; }
-.dp-d { grid-column: 2; grid-row: 3; border-radius: 2px 2px 12px 12px; }
+.dp:active { background: rgb(50,50,80); }
+.dp-u { grid-column: 2; grid-row: 1; border-radius: 14px 14px 0 0; border-bottom: none; }
+.dp-l { grid-column: 1; grid-row: 2; border-radius: 14px 0 0 14px; border-right: none; }
+.dp-r { grid-column: 3; grid-row: 2; border-radius: 0 14px 14px 0; border-left: none; }
+.dp-d { grid-column: 2; grid-row: 3; border-radius: 0 0 14px 14px; border-top: none; }
 .dp-c {
-grid-column: 2;
-grid-row: 2;
-background: rgba(20,20,38,.9);
+grid-column: 2; grid-row: 2;
+background: rgb(22,22,40);
 border: 1px solid rgba(255,255,255,.04);
-display: flex;
-align-items: center;
-justify-content: center;
 }
-.dp-c::after {
-content: ‘’;
-width: 10px;
-height: 10px;
-border-radius: 50%;
-background: rgba(255,255,255,.06);
-border: 1px solid rgba(255,255,255,.05);
-}
-/* D-pad HOLD accent on ▲ */
+/* Invisible placeholder cells */
+.dpad::before, .dpad::after { content: ‘’; }
+/* H (Hold) — purple accent */
 .dp-hold {
-background: linear-gradient(180deg, rgba(123,63,242,.5), rgba(60,30,140,.6));
-color: rgba(255,255,255,.7);
-font-size: clamp(.55rem, 1.5vmin, .68rem);
+background: linear-gradient(180deg, #6B35D9, #4A20A0);
+color: rgba(255,255,255,.85);
+font-size: clamp(.6rem, 1.6vmin, .72rem);
 font-weight: 800;
 letter-spacing: 1px;
+border-color: rgba(107,53,217,.4);
 }
-/* Action buttons — 4-diamond (right side) */
+.dp-hold:active { background: linear-gradient(180deg, #8248F0, #5B2DC9); }
+
+/* ── ACTION BUTTONS: triangle layout ── */
 .apad {
-–as: clamp(42px, 11vmin, 54px);
-–ag: clamp(3px, .8vmin, 5px);
-position: relative;
-width: calc(var(–as) * 3 + var(–ag) * 2);
-height: calc(var(–as) * 3 + var(–ag) * 2);
+–as: clamp(48px, 12.5vmin, 58px);
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: clamp(6px, 1.5vmin, 10px);
+width: calc(var(–as) * 2 + clamp(6px, 1.5vmin, 10px));
 flex-shrink: 0;
 }
 .ap {
-position: absolute;
 width: var(–as);
 height: var(–as);
 border: none;
 border-radius: 50%;
 color: #fff;
 font-weight: 800;
-font-size: clamp(.9rem, 2.5vmin, 1.15rem);
+font-size: clamp(.95rem, 2.6vmin, 1.2rem);
 font-family: var(–f-body);
 display: flex;
 align-items: center;
@@ -1025,8 +1015,9 @@ justify-content: center;
 cursor: pointer;
 -webkit-user-select: none;
 user-select: none;
-box-shadow: 0 3px 0 rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.1);
+box-shadow: 0 3px 0 rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.1);
 transition: transform .06s, box-shadow .06s;
+position: relative;
 }
 .ap::before {
 content: ‘’;
@@ -1036,23 +1027,16 @@ border-radius: 50%;
 background: linear-gradient(to bottom, rgba(255,255,255,.12), transparent 50%);
 pointer-events: none;
 }
-.ap:active { transform: translateY(3px); box-shadow: 0 0 0 rgba(0,0,0,0); }
-.ap-top  { left: 50%; top: 0; transform: translateX(-50%); }
-.ap-top:active { transform: translateX(-50%) translateY(3px); }
-.ap-left { left: 0; top: 50%; transform: translateY(-50%); }
-.ap-left:active { transform: translateY(calc(-50% + 3px)); }
-.ap-right{ right: 0; top: 50%; transform: translateY(-50%); }
-.ap-right:active{ transform: translateY(calc(-50% + 3px)); }
-.ap-bot  { left: 50%; bottom: 0; transform: translateX(-50%); }
-.ap-bot:active { transform: translateX(-50%) translateY(3px); }
+.ap:active { transform: translateY(3px); box-shadow: 0 0 0 transparent; }
+/* Top button — spans full width centered */
+.ap-rr { margin: 0 auto; }
+/* Colors */
 .ap-rl { background: linear-gradient(135deg, #1E5A8F, #0F3460); }
 .ap-rr { background: linear-gradient(135deg, #1E5A8F, #0F3460); }
 .ap-hd {
 background: linear-gradient(135deg, #D4A017, #B8860B);
-color: #fff;
-box-shadow: 0 3px 0 rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.15), 0 0 14px rgba(209,167,81,.25);
+box-shadow: 0 3px 0 rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.15), 0 0 16px rgba(209,167,81,.2);
 }
-.ap-sd { background: linear-gradient(135deg, rgba(40,40,60,.9), rgba(25,25,45,.9)); color: rgba(255,255,255,.4); font-size: clamp(.7rem, 1.8vmin, .85rem); }
 
 /* ── ORIENTATION WARNING ── */
 #ow {
@@ -1078,9 +1062,7 @@ padding: 32px;
 SCREEN 4 — PAUSE
 ══════════════════════════════════════════ */
 #s4 {
-background: rgba(0,0,0,.86);
-backdrop-filter: blur(14px);
--webkit-backdrop-filter: blur(14px);
+background: rgb(2,2,6);
 align-items: center;
 justify-content: center;
 padding: 24px;
@@ -1095,10 +1077,8 @@ flex-direction: column;
 align-items: center;
 gap: 14px;
 background: rgb(18,18,34);
-backdrop-filter: blur(14px);
--webkit-backdrop-filter: blur(14px);
-border: 1px solid var(–glass-border);
-box-shadow: 0 1px 0 var(–glass-shine) inset, 0 20px 60px rgba(0,0,0,.5);
+border: 1px solid rgb(34,34,54);
+box-shadow: 0 1px 0 rgba(255,255,255,.04) inset, 0 20px 60px rgba(0,0,0,.5);
 }
 .pt {
 font-family: var(–f-display);
@@ -1155,7 +1135,7 @@ transition: background .12s;
 SCREEN 5 — GAME OVER
 ══════════════════════════════════════════ */
 #s5 {
-background: radial-gradient(ellipse at 50% 0%, rgba(40,4,4,.97) 0%, rgba(6,5,15,.99) 100%);
+background: radial-gradient(ellipse at 50% 0%, rgb(38,4,4) 0%, rgb(6,5,14) 100%);
 }
 .go-w {
 max-width: 380px;
@@ -1200,8 +1180,8 @@ animation: fUp .5s var(–ease-out) .45s both;
 
 .go-sb {
 width: 100%;
-background: rgba(255,59,48,.07);
-border: 1px solid rgba(255,59,48,.18);
+background: rgb(20,8,8);
+border: 1px solid rgb(48,16,14);
 border-radius: 16px;
 padding: clamp(12px, 3vmin, 18px);
 text-align: center;
@@ -1244,8 +1224,8 @@ margin-bottom: clamp(14px, 3.5vmin, 20px);
 animation: fUp .4s var(–ease-out) .55s both;
 }
 .go-s {
-background: rgba(255,255,255,.04);
-border: 1px solid rgba(255,255,255,.07);
+background: rgb(12,12,20);
+border: 1px solid rgb(24,24,38);
 border-radius: 13px;
 padding: clamp(8px, 2vmin, 13px) 6px;
 text-align: center;
@@ -1275,7 +1255,7 @@ animation: fUp .4s var(–ease-out) .65s both;
 SCREEN 6 — FAREWELL
 ══════════════════════════════════════════ */
 #s6 {
-background: radial-gradient(ellipse at 50% 100%, rgba(0,18,8,.98) 0%, rgba(5,5,15,.99) 60%);
+background: radial-gradient(ellipse at 50% 100%, rgb(0,14,6) 0%, rgb(5,5,14) 60%);
 }
 .fw-w {
 max-width: 360px;
@@ -1316,8 +1296,8 @@ animation: fUp .4s var(–ease-out) .32s both;
 .fw-q strong { color: rgba(255,255,255,.78); font-style: normal; font-weight: 600; }
 .fw-hb {
 width: 100%;
-background: rgba(52,199,89,.07);
-border: 1px solid rgba(52,199,89,.15);
+background: rgb(8,18,12);
+border: 1px solid rgb(18,40,26);
 border-radius: 16px;
 padding: 16px;
 text-align: center;
@@ -1762,8 +1742,8 @@ transition: width .2s, left .2s;
 /* Quote card — iOS notification style (Game Over) */
 .go-quote-card {
 width: 100%;
-background: rgba(255,255,255,.05);
-border: 1px solid rgba(255,255,255,.08);
+background: rgb(14,14,24);
+border: 1px solid rgb(28,28,44);
 border-radius: 18px;
 padding: clamp(14px, 3.5vmin, 20px);
 margin-bottom: clamp(14px, 3.5vmin, 20px);
@@ -1829,6 +1809,400 @@ animation: cursorBlink .6s step-end infinite;
 .ptc-impact { position: fixed; border-radius: 2px; pointer-events: none; z-index: 999; animation: impactBurst .55s ease-out forwards; }
 @keyframes impactBurst { 0% { opacity: .9; transform: translate(0, 0) scale(1); } 100% { opacity: 0; transform: translate(var(–px), var(–py)) scale(0.3); } }
 
+/* ══════════════════════════════════════════
+MODE SELECTOR (s0)
+══════════════════════════════════════════ */
+#s0 { background: var(–bg-gradient); }
+.ms-wrap {
+max-width: 420px; margin: 0 auto;
+padding: calc(var(–sat) + clamp(24px, 6vmin, 40px)) 20px calc(var(–sab) + 30px);
+display: flex; flex-direction: column; align-items: center; min-height: 100%;
+}
+.ms-title {
+font-family: var(–f-display); font-size: clamp(1.4rem, 4.5vmin, 2rem);
+font-weight: 900; letter-spacing: -1px; color: #fff;
+text-align: center; margin-bottom: 6px;
+}
+.ms-sub {
+font-size: clamp(.72rem, 2vmin, .88rem); color: rgba(255,255,255,.35);
+text-align: center; margin-bottom: clamp(24px, 6vmin, 36px);
+}
+.ms-cards { display: flex; flex-direction: column; gap: clamp(14px, 3.5vmin, 20px); width: 100%; }
+.ms-card {
+background: rgb(16,16,30); border: 1px solid rgb(32,32,52); border-radius: 22px;
+padding: clamp(20px, 5vmin, 28px); cursor: pointer;
+display: flex; align-items: center; gap: clamp(14px, 3.5vmin, 20px);
+transition: border-color .2s, transform .12s var(–spring);
+-webkit-user-select: none; user-select: none;
+}
+.ms-card:active { transform: scale(.98); }
+.ms-card:hover { border-color: rgb(50,50,80); }
+.ms-ico {
+width: clamp(56px, 14vmin, 72px); height: clamp(56px, 14vmin, 72px);
+border-radius: 16px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+font-size: clamp(1.6rem, 5vmin, 2.2rem);
+}
+.ms-ico-retro { background: linear-gradient(135deg, #4a5a2a, #2d3a18); }
+.ms-ico-modern { background: linear-gradient(135deg, #2a2a5a, #18183a); }
+.ms-info { flex: 1; }
+.ms-info h3 {
+font-family: var(–f-display); font-size: clamp(1rem, 2.8vmin, 1.2rem);
+font-weight: 800; margin-bottom: 4px;
+}
+.ms-info p { font-size: clamp(.68rem, 1.8vmin, .8rem); color: rgba(255,255,255,.35); line-height: 1.5; }
+.ms-card-retro h3 { color: #8bac0f; }
+.ms-card-modern h3 { color: var(–cyan); }
+.ms-arrow { color: rgba(255,255,255,.2); font-size: 1.2rem; flex-shrink: 0; }
+.ms-brand {
+margin-top: auto; padding-top: 24px; text-align: center;
+font-family: ‘Outfit’, sans-serif; font-size: .52rem;
+letter-spacing: 1.5px; text-transform: uppercase; color: rgba(209,167,81,.2);
+}
+
+/* ══════════════════════════════════════════
+SNES CONTROLLER (Modern mode)
+══════════════════════════════════════════ */
+.snes-pad {
+display: flex; align-items: center; justify-content: space-between;
+padding: clamp(6px, 1.5vmin, 10px) clamp(8px, 2vmin, 14px);
+background: linear-gradient(180deg, rgb(22,22,38), rgb(14,14,26));
+border-top: 1px solid rgb(36,36,56);
+border-radius: 24px 24px 0 0;
+margin: 0 clamp(4px, 1vmin, 8px);
+}
+/* SNES D-pad */
+.snes-dpad {
+–sd: clamp(42px, 10.5vmin, 50px);
+display: grid;
+grid-template-columns: var(–sd) var(–sd) var(–sd);
+grid-template-rows: var(–sd) var(–sd) var(–sd);
+flex-shrink: 0;
+}
+.sd {
+background: rgb(28,28,46);
+border: 1px solid rgb(38,38,58);
+color: rgba(255,255,255,.5);
+font-size: clamp(.75rem, 2vmin, .92rem);
+font-family: var(–f-body);
+display: flex; align-items: center; justify-content: center;
+cursor: pointer; -webkit-user-select: none; user-select: none;
+padding: 0; border-radius: 0;
+transition: background .06s;
+}
+.sd:active { background: rgb(48,48,72); }
+.sd-u { grid-column: 2; grid-row: 1; border-radius: 12px 12px 0 0; border-bottom: none; }
+#bt-hl.sd { background: linear-gradient(180deg, #4A2880, #321860); color: rgba(255,255,255,.8); font-size: clamp(.58rem, 1.5vmin, .7rem); font-weight: 800; letter-spacing: 1px; border-color: rgba(107,53,217,.3); }
+#bt-hl.sd:active { background: linear-gradient(180deg, #5A32A0, #3A1870); }
+.sd-l { grid-column: 1; grid-row: 2; border-radius: 12px 0 0 12px; border-right: none; }
+.sd-r { grid-column: 3; grid-row: 2; border-radius: 0 12px 12px 0; border-left: none; }
+.sd-d { grid-column: 2; grid-row: 3; border-radius: 0 0 12px 12px; border-top: none; }
+.sd-c { grid-column: 2; grid-row: 2; background: rgb(22,22,38); border: 1px solid rgb(32,32,50); }
+/* SNES center labels */
+.snes-mid {
+display: flex; flex-direction: column; align-items: center; gap: clamp(4px, 1vmin, 6px);
+}
+.snes-lbl {
+font-family: var(–f-body); font-size: clamp(.42rem, 1.1vmin, .52rem);
+letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.15);
+}
+.snes-sel, .snes-sta {
+width: clamp(28px, 7vmin, 34px); height: clamp(12px, 3vmin, 15px);
+border-radius: 8px; border: none; cursor: pointer;
+background: rgb(36,36,54); color: rgba(255,255,255,.3);
+font-size: clamp(.38rem, 1vmin, .46rem); font-family: var(–f-body);
+letter-spacing: 1px; text-transform: uppercase;
+display: flex; align-items: center; justify-content: center;
+}
+.snes-sta:active, .snes-sel:active { background: rgb(50,50,70); }
+/* SNES action buttons (4 diamond) */
+.snes-btns {
+–sb: clamp(42px, 10.5vmin, 50px);
+display: grid;
+grid-template-columns: var(–sb) calc(var(–sb) * .3) var(–sb);
+grid-template-rows: var(–sb) calc(var(–sb) * .3) var(–sb);
+flex-shrink: 0;
+}
+.sb {
+border: none; border-radius: 50%;
+font-weight: 800; font-size: clamp(.72rem, 2vmin, .88rem);
+font-family: var(–f-display);
+display: flex; align-items: center; justify-content: center;
+cursor: pointer; -webkit-user-select: none; user-select: none;
+position: relative;
+box-shadow: 0 3px 0 rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.12);
+transition: transform .06s, box-shadow .06s;
+}
+.sb::before {
+content: ‘’; position: absolute; inset: 0; border-radius: 50%;
+background: linear-gradient(to bottom, rgba(255,255,255,.14), transparent 50%);
+pointer-events: none;
+}
+.sb:active { transform: translateY(3px); box-shadow: 0 0 0 transparent; }
+.sb-x { grid-column: 2; grid-row: 1; background: linear-gradient(135deg, #6B6BD0, #4A4AA0); color: rgba(255,255,255,.9); }
+.sb-y { grid-column: 1; grid-row: 2; background: linear-gradient(135deg, #4A8F4A, #2A6A2A); color: rgba(255,255,255,.9); }
+.sb-a { grid-column: 3; grid-row: 2; background: linear-gradient(135deg, #D4A017, #B8860B); color: #fff; box-shadow: 0 3px 0 rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.15), 0 0 12px rgba(209,167,81,.2); }
+.sb-b { grid-column: 2; grid-row: 3; background: linear-gradient(135deg, #C04040, #8B2020); color: rgba(255,255,255,.9); }
+
+/* ══════════════════════════════════════════
+GAMEBOY RETRO SKIN
+══════════════════════════════════════════ */
+.skin-retro {
+–gb-darkest: #0f380f;
+–gb-dark: #306230;
+–gb-light: #8bac0f;
+–gb-lightest: #9bbc0f;
+}
+/* Retro background */
+.skin-retro #s1 { background: linear-gradient(180deg, #1a1a10, #0f0f08); }
+.skin-retro #s3 { background: #0a0a06; }
+.skin-retro #s5 { background: radial-gradient(ellipse at 50% 0%, #1a1208, #0a0a06 100%); }
+.skin-retro #s6 { background: radial-gradient(ellipse at 50% 100%, #0a120a, #0a0a06 60%); }
+
+/* GB casing around board */
+.skin-retro #board {
+border: 3px solid #4a5a2a;
+border-radius: 4px;
+box-shadow: inset 0 0 20px rgba(0,0,0,.8), 0 0 0 6px #1a1a10, 0 0 0 7px #3a4a20;
+}
+/* HUD retro */
+.skin-retro .hp { background: rgb(18,22,12); border-color: rgb(30,38,20); }
+.skin-retro #hsc .hp-v { color: var(–gb-lightest); }
+.skin-retro #hli .hp-v { color: var(–gb-light); }
+.skin-retro #hlv .hp-v { color: var(–gb-lightest); }
+.skin-retro #hhi .hp-v { color: var(–gb-light); }
+.skin-retro .hp-l { color: rgba(139,172,15,.5); }
+/* HOLD/NEXT retro */
+.skin-retro .gbox { background: rgb(14,18,10); border-color: rgb(28,36,18); }
+.skin-retro .gbl { color: rgba(139,172,15,.4); }
+/* Brand title retro */
+.skin-retro .brand-t {
+background: linear-gradient(135deg, #8bac0f, #9bbc0f, #6a8c00);
+-webkit-background-clip: text; background-clip: text;
+}
+.skin-retro .sys-dot { background: #8bac0f; box-shadow: 0 0 7px #8bac0f; }
+/* Landing stats retro */
+.skin-retro .ls { background: rgb(14,18,10); border-color: rgb(28,36,18); }
+.skin-retro .ls-v { color: #9bbc0f !important; }
+.skin-retro .ls-l { color: rgba(139,172,15,.4); }
+/* Buttons retro */
+.skin-retro .btn {
+background: linear-gradient(135deg, #4a6a10, #2a4a00);
+box-shadow: 0 2px 0 rgba(255,255,255,.1) inset, 0 6px 18px rgba(74,90,42,.3);
+}
+.skin-retro .btn.ghost { background: rgb(18,22,12); border-color: rgb(38,48,26); color: rgba(139,172,15,.6); }
+.skin-retro .btn.red { background: linear-gradient(135deg, #6a3a10, #4a2a00); }
+.skin-retro .btn.green { background: linear-gradient(135deg, #4a6a10, #2a4a00); }
+/* Mode cards retro */
+.skin-retro .mc.on { background: rgba(139,172,15,.1); border-color: rgba(139,172,15,.3); }
+.skin-retro .mc .mn { color: rgba(139,172,15,.7); }
+.skin-retro .mc.on .mn { color: #9bbc0f; }
+/* Game Over retro */
+.skin-retro .go-t { color: #8bac0f; text-shadow: 0 0 30px rgba(139,172,15,.3); }
+.skin-retro .go-sb { background: rgb(14,18,10); border-color: rgb(38,48,26); }
+.skin-retro .go-s { background: rgb(12,16,8); border-color: rgb(28,36,18); }
+.skin-retro .go-quote-card { background: rgb(14,18,10); border-color: rgb(28,36,18); }
+.skin-retro .go-sv { color: #9bbc0f !important; }
+.skin-retro #nrec { color: #9bbc0f; text-shadow: 0 0 12px rgba(155,188,15,.5); }
+/* Farewell retro */
+.skin-retro .fw-t { color: #8bac0f; text-shadow: 0 0 30px rgba(139,172,15,.3); }
+.skin-retro .fw-hb { background: rgb(12,18,10); border-color: rgb(28,40,20); }
+.skin-retro .fw-hv { color: #9bbc0f; }
+/* Pause retro */
+.skin-retro .pcard { background: rgb(14,18,10); border-color: rgb(38,48,26); }
+.skin-retro .pt { color: #8bac0f; text-shadow: 0 0 20px rgba(139,172,15,.3); }
+.skin-retro .pr { background: linear-gradient(135deg, #4a6a10, #2a4a00); box-shadow: 0 4px 14px rgba(74,90,42,.3); }
+.skin-retro .pq { background: rgba(100,40,20,.15); border-color: rgba(120,50,20,.3); }
+/* Near record retro */
+.skin-retro #near-rec { color: #9bbc0f; }
+.skin-retro #board.near-glow { border-color: #6a8c00; box-shadow: inset 0 0 20px rgba(0,0,0,.8), 0 0 0 6px #1a1a10, 0 0 0 7px #6a8c00, 0 0 30px rgba(106,140,0,.2); }
+/* ── GameBoy Controller (accurate replica) ── */
+.gb-pad {
+display: none;
+flex-direction: column;
+background: linear-gradient(180deg, rgb(46,48,42), rgb(38,40,35));
+border-top: 2px solid rgb(58,60,52);
+border-radius: 0 0 18px 18px;
+margin: 0 clamp(4px, 1vmin, 8px);
+padding: clamp(8px, 2vmin, 14px) clamp(12px, 3vmin, 18px) clamp(10px, 2.5vmin, 16px);
+position: relative;
+}
+.gb-pad-row {
+display: flex; align-items: center; justify-content: space-between;
+margin-bottom: clamp(6px, 1.5vmin, 10px);
+}
+/* GB D-pad: dark grey cross on lighter body */
+.gb-dpad {
+–gd: clamp(38px, 9.5vmin, 46px);
+display: grid;
+grid-template-columns: var(–gd) var(–gd) var(–gd);
+grid-template-rows: var(–gd) var(–gd) var(–gd);
+flex-shrink: 0;
+}
+.gd {
+background: rgb(20,22,18);
+border: 1px solid rgb(14,16,12);
+color: rgba(255,255,255,.35);
+font-size: clamp(.65rem, 1.8vmin, .82rem);
+font-family: var(–f-body);
+display: flex; align-items: center; justify-content: center;
+cursor: pointer; -webkit-user-select: none; user-select: none;
+padding: 0; border-radius: 0;
+transition: background .06s;
+box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+}
+.gd:active { background: rgb(36,38,32); }
+.gd-u { grid-column: 2; grid-row: 1; border-radius: 6px 6px 0 0; border-bottom: none; }
+.gd-l { grid-column: 1; grid-row: 2; border-radius: 6px 0 0 6px; border-right: none; }
+.gd-r { grid-column: 3; grid-row: 2; border-radius: 0 6px 6px 0; border-left: none; }
+.gd-d { grid-column: 2; grid-row: 3; border-radius: 0 0 6px 6px; border-top: none; }
+.gd-c { grid-column: 2; grid-row: 2; background: rgb(16,18,14); border: 1px solid rgb(12,14,10); }
+/* GB A/B buttons — maroon/dark red, rotated 25° */
+.gb-ab-wrap {
+display: flex; flex-direction: column; align-items: center;
+transform: rotate(-25deg);
+flex-shrink: 0;
+}
+.gb-ab {
+display: flex; gap: clamp(8px, 2vmin, 12px);
+}
+.gbb {
+width: clamp(44px, 11vmin, 52px); height: clamp(44px, 11vmin, 52px);
+border-radius: 50%; border: none;
+background: linear-gradient(135deg, #8B1A2B, #5C0E1A);
+color: rgba(255,255,255,.75);
+font-weight: 800; font-size: clamp(.82rem, 2.2vmin, 1rem);
+font-family: var(–f-display);
+display: flex; align-items: center; justify-content: center;
+cursor: pointer; -webkit-user-select: none; user-select: none;
+box-shadow: 0 3px 0 rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.08), inset 0 -1px 2px rgba(0,0,0,.3);
+transition: transform .06s, box-shadow .06s;
+}
+.gbb:active { transform: translateY(3px); box-shadow: 0 0 0 transparent; }
+.gb-ab-labels {
+display: flex; gap: clamp(28px, 7vmin, 44px);
+margin-top: 3px;
+font-size: clamp(.4rem, 1vmin, .48rem);
+color: rgb(80,82,72);
+font-weight: 700; letter-spacing: 1px;
+font-family: var(–f-body);
+}
+/* GB branding strip */
+.gb-brand {
+text-align: center;
+font-family: ‘Outfit’, var(–f-display);
+margin-bottom: clamp(4px, 1vmin, 8px);
+}
+.gb-brand-label {
+font-size: clamp(.42rem, 1.1vmin, .52rem);
+letter-spacing: 2.5px; text-transform: uppercase;
+color: rgb(70,72,62); font-weight: 500;
+}
+.gb-brand-name {
+font-size: clamp(.7rem, 1.9vmin, .88rem);
+letter-spacing: -0.5px; font-weight: 700;
+color: rgb(58,60,52);
+}
+/* GB SELECT/START — oblongs, angled */
+.gb-ss {
+display: none;
+justify-content: center; gap: clamp(14px, 3.5vmin, 20px);
+transform: rotate(-25deg);
+margin: 0 auto;
+}
+.gb-ss-btn {
+width: clamp(36px, 9vmin, 44px); height: clamp(12px, 3vmin, 15px);
+border-radius: 10px; border: none; cursor: pointer;
+background: rgb(52,54,46);
+color: transparent;
+box-shadow: inset 0 1px 2px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.04);
+transition: background .06s;
+}
+.gb-ss-btn:active { background: rgb(62,64,56); }
+.gb-ss-labels {
+display: flex; justify-content: center; gap: clamp(18px, 4.5vmin, 28px);
+margin-top: 4px;
+font-size: clamp(.36rem, .9vmin, .44rem);
+color: rgb(70,72,62);
+font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+font-family: var(–f-body);
+}
+/* Speaker grille (decorative) */
+.gb-speaker {
+position: absolute; right: clamp(10px, 2.5vmin, 16px); bottom: clamp(10px, 2.5vmin, 16px);
+display: flex; flex-direction: column; gap: 3px; transform: rotate(-25deg);
+}
+.gb-speaker-line {
+width: clamp(24px, 6vmin, 32px); height: 2px;
+background: rgb(52,54,46); border-radius: 1px;
+}
+
+/* Skin visibility toggles */
+.skin-retro .gb-pad { display: flex; }
+.skin-retro .snes-pad { display: none; }
+.skin-retro .snes-mid-row { display: none; }
+.skin-retro .gb-ss { display: flex; }
+.snes-pad { display: flex; }
+.gb-pad { display: none; }
+.gb-ss { display: none; }
+.snes-mid-row { display: flex; justify-content: center; padding: clamp(2px, .5vmin, 4px) 0; }
+
+/* ── Mode switch button ── */
+.mode-sw {
+display: block; width: 100%; padding: 10px; margin-bottom: clamp(10px, 2.5vmin, 16px);
+border: 1px solid rgb(28,28,46); border-radius: 10px; cursor: pointer;
+background: rgb(14,14,26); color: rgba(255,255,255,.3);
+font-size: clamp(.62rem, 1.6vmin, .74rem); font-weight: 600;
+font-family: var(–f-body); letter-spacing: .5px;
+transition: background .15s, color .15s;
+text-align: center;
+}
+.mode-sw:active { background: rgb(22,22,40); color: rgba(255,255,255,.5); }
+.skin-retro .mode-sw { background: rgb(14,18,10); border-color: rgb(30,38,20); color: rgba(139,172,15,.35); }
+.skin-retro .mode-sw:active { background: rgb(22,28,16); color: rgba(139,172,15,.5); }
+
+/* ── Exit splash (farewell transition) ── */
+#exit-splash {
+position: fixed; inset: 0; z-index: 9988;
+background: #0a0a0f;
+display: none; flex-direction: column;
+align-items: center; justify-content: center;
+opacity: 0;
+}
+#exit-splash.show {
+display: flex;
+animation: exitIn .4s ease forwards;
+}
+#exit-splash.out {
+animation: exitOut .4s ease forwards;
+}
+@keyframes exitIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes exitOut { from { opacity: 1; } to { opacity: 0; } }
+.exit-chev { width: 48px; height: 48px; margin-bottom: 12px; opacity: .6; }
+.exit-brand {
+font-family: ‘Outfit’, sans-serif; font-size: clamp(.7rem, 1.8vmin, .88rem);
+font-weight: 500; color: rgba(209,167,81,.4);
+letter-spacing: 1px;
+}
+
+/* ── Branding footer animation ── */
+.lf-chev {
+display: inline-block; vertical-align: middle;
+width: 12px; height: 12px; margin-right: 4px;
+opacity: .2;
+animation: chevBreathe 3s ease infinite;
+}
+@keyframes chevBreathe { 0%,100% { opacity: .15; transform: scale(1); } 50% { opacity: .3; transform: scale(1.1); } }
+
+/* ── Game Over branding ── */
+.go-powered {
+text-align: center; margin-top: 8px; padding: 6px;
+font-family: ‘Outfit’, sans-serif;
+font-size: clamp(.48rem, 1.2vmin, .56rem);
+letter-spacing: 2px; text-transform: uppercase;
+color: rgba(209,167,81,.18);
+animation: fUp .4s var(–ease-out) .75s both;
+}
+
 </style>
 </head>
 <body>
@@ -1843,9 +2217,19 @@ animation: cursorBlink .6s step-end infinite;
   </svg>
   <div class="splash-text-clip"><div class="splash-name">Explical<span class="sp-ia">ia</span></div></div>
   <div class="splash-sys">System</div>
-  <div class="splash-tag">Tecnología educativa</div>
+  <div class="splash-tag">Entertainment System</div>
   <div class="splash-progress"><div class="splash-progress-bar"></div></div>
   <div class="splash-legal">© 2025 Explicalia System</div>
+</div>
+
+<!-- EXIT SPLASH -->
+
+<div id="exit-splash">
+  <svg class="exit-chev" viewBox="0 0 80 80" aria-hidden="true">
+    <path d="M8 14L40 30L72 14V26L46 38V50H34V38L8 26Z" fill="#D1A751"/>
+    <path d="M8 40L40 56L72 40V52L40 68L8 52Z" fill="#D1A751" opacity=".7"/>
+  </svg>
+  <div class="exit-brand">Explicalia System</div>
 </div>
 
 <div id="amb" aria-hidden="true">
@@ -1868,7 +2252,37 @@ animation: cursorBlink .6s step-end infinite;
      ║  SCREEN 1 — LANDING             ║
      ╚══════════════════════════════════╝ -->
 
-<div class="scr on" id="s1" role="main">
+<div class="scr on" id="s0">
+  <div class="sw"><div class="ms-wrap">
+    <svg width="48" height="48" viewBox="0 0 80 80" style="margin-bottom:16px" aria-hidden="true">
+      <path d="M8 14L40 30L72 14V26L46 38V50H34V38L8 26Z" fill="#D1A751"/>
+      <path d="M8 40L40 56L72 40V52L40 68L8 52Z" fill="#D1A751" opacity=".7"/>
+    </svg>
+    <div class="ms-title" data-i18n="msTitle">Elige tu experiencia</div>
+    <div class="ms-sub" data-i18n="msSub">Dos formas de jugar. El mismo Tetris.</div>
+    <div class="ms-cards">
+      <div class="ms-card ms-card-retro" onclick="SKIN.set('retro')">
+        <div class="ms-ico ms-ico-retro">🎮</div>
+        <div class="ms-info">
+          <h3 data-i18n="msRetroT">Modo Retro</h3>
+          <p data-i18n="msRetroD">La experiencia clásica GameBoy. Paleta verde, estética pixel, nostalgia pura.</p>
+        </div>
+        <div class="ms-arrow">›</div>
+      </div>
+      <div class="ms-card ms-card-modern" onclick="SKIN.set('modern')">
+        <div class="ms-ico ms-ico-modern">⚡</div>
+        <div class="ms-info">
+          <h3 data-i18n="msModernT">Modo Moderno</h3>
+          <p data-i18n="msModernD">Efectos visuales, neon, partículas. La versión definitiva.</p>
+        </div>
+        <div class="ms-arrow">›</div>
+      </div>
+    </div>
+    <div class="ms-brand">Powered by Explicalia System</div>
+  </div></div>
+</div>
+
+<div class="scr" id="s1" role="main">
   <canvas id="rain" aria-hidden="true"></canvas>
   <div class="sw">
     <div class="l-wrap">
@@ -1941,8 +2355,9 @@ animation: cursorBlink .6s step-end infinite;
     <button class="btn ghost" onclick="UI.openManual()" aria-label="Domina los controles" data-i18n="btnManual">Domina los controles</button>
   </div>
 
+  <button class="mode-sw" onclick="SKIN.showSelector()" data-i18n="switchMode">↔ Cambiar modo de juego</button>
   <footer class="l-foot">
-    <div class="lf1" data-i18n-html="foot1">Un juego de <a href="https://www.explicalia.com" target="_blank" rel="noopener">explicalia.com</a></div>
+    <div class="lf1"><svg class="lf-chev" viewBox="0 0 80 80"><path d="M8 14L40 30L72 14V26L46 38V50H34V38L8 26Z" fill="#D1A751"/><path d="M8 40L40 56L72 40V52L40 68L8 52Z" fill="#D1A751" opacity=".7"/></svg><span data-i18n-html="foot1">Un juego de <a href="https://www.explicalia.com" target="_blank" rel="noopener">explicalia.com</a></span></div>
     <div class="lf2">© 2025 Explicalia System · Todos los derechos reservados</div>
   </footer>
 
@@ -2106,22 +2521,67 @@ animation: cursorBlink .6s step-end infinite;
   </div>
 
   <div id="gctrl">
-    <div class="pad-row">
-      <div class="dpad">
-        <button class="dp dp-u dp-hold" id="bt-hl" aria-label="Hold">H</button>
-        <button class="dp dp-l" id="bt-le" aria-label="Mover izquierda">◀</button>
-        <div class="dp-c"></div>
-        <button class="dp dp-r" id="bt-ri" aria-label="Mover derecha">▶</button>
-        <button class="dp dp-d" id="bt-dn" aria-label="Caída suave">▼</button>
+    <!-- SNES Controller (Modern mode) -->
+    <div class="snes-pad">
+      <div class="snes-dpad">
+        <button class="sd sd-u" id="bt-hl" aria-label="Hold">H</button>
+        <button class="sd sd-l" id="bt-le" aria-label="←">◀</button>
+        <div class="sd-c"></div>
+        <button class="sd sd-r" id="bt-ri" aria-label="→">▶</button>
+        <button class="sd sd-d" id="bt-dn" aria-label="↓">▼</button>
       </div>
-      <div class="apad">
-        <button class="ap ap-top ap-rr" id="bt-rr" aria-label="Rotar derecha">↻</button>
-        <button class="ap ap-left ap-rl" id="bt-rl" aria-label="Rotar izquierda">↺</button>
-        <button class="ap ap-right ap-hd" id="bt-hd" aria-label="Hard drop">⬇</button>
-        <button class="ap ap-bot ap-sd" onclick="G&&G.pause()" aria-label="Pausa">⏸</button>
+      <div class="snes-mid">
+        <div class="snes-lbl">Explicalia</div>
+        <div style="display:flex;gap:8px;">
+          <button class="snes-sel" aria-label="Select">···</button>
+          <button class="snes-sta" onclick="G&&G.pause()" aria-label="Pause">≡</button>
+        </div>
+      </div>
+      <div class="snes-btns">
+        <button class="sb sb-x" id="bt-hd" aria-label="Hard drop">X</button>
+        <button class="sb sb-y" id="bt-rl" aria-label="Rotar CCW">Y</button>
+        <button class="sb sb-a" id="bt-rr" aria-label="Rotar CW">A</button>
+        <button class="sb sb-b" aria-label="Noop"></button>
       </div>
     </div>
-    <div class="hint" aria-hidden="true" data-i18n="hint">desliza tablero · toca izq/der para rotar · flick rápido = hard drop</div>
+    <!-- GameBoy Controller (Retro mode — accurate replica) -->
+    <div class="gb-pad">
+      <div class="gb-brand">
+        <div class="gb-brand-label">Explicalia</div>
+        <div class="gb-brand-name">TETRIS</div>
+      </div>
+      <div class="gb-pad-row">
+        <div class="gb-dpad">
+          <button class="gd gd-u" id="gb-hl" aria-label="Hold">▲</button>
+          <button class="gd gd-l" id="gb-le" aria-label="←">◀</button>
+          <div class="gd-c"></div>
+          <button class="gd gd-r" id="gb-ri" aria-label="→">▶</button>
+          <button class="gd gd-d" id="gb-dn" aria-label="↓">▼</button>
+        </div>
+        <div class="gb-ab-wrap">
+          <div class="gb-ab">
+            <button class="gbb" id="gb-hd" aria-label="Hard drop">B</button>
+            <button class="gbb" id="gb-rr" aria-label="Rotar">A</button>
+          </div>
+          <div class="gb-ab-labels"><span>B</span><span>A</span></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
+        <div class="gb-ss">
+          <button class="gb-ss-btn" aria-label="Select"></button>
+          <button class="gb-ss-btn" onclick="G&&G.pause()" aria-label="Start"></button>
+        </div>
+        <div class="gb-ss-labels"><span>SELECT</span><span>START</span></div>
+      </div>
+      <div class="gb-speaker" aria-hidden="true">
+        <div class="gb-speaker-line"></div><div class="gb-speaker-line"></div>
+        <div class="gb-speaker-line"></div><div class="gb-speaker-line"></div>
+        <div class="gb-speaker-line"></div>
+      </div>
+    </div>
+    <div class="snes-mid-row">
+      <div class="hint" aria-hidden="true" data-i18n="hint">desliza tablero · toca izq/der para rotar · flick rápido = hard drop</div>
+    </div>
   </div>
 </div>
 
@@ -2171,6 +2631,7 @@ animation: cursorBlink .6s step-end infinite;
         <button class="btn red" onclick="UI.retry()" data-i18n="btnRetry">Revancha</button>
         <button class="btn ghost" onclick="UI.toLanding()" data-i18n="btnMenu">Volver al menú</button>
       </div>
+      <div class="go-powered">Powered by Explicalia System</div>
     </div>
   </div>
 </div>
@@ -2267,37 +2728,43 @@ es:{by:'por',tagline:'Siete piezas. Infinitas decisiones.<br>¿Cuántas líneas 
   challenge0:'Tu historia empieza aquí.',challengeHi:'¿Puedes superar los {0} puntos?',challengeGen:'Cada partida es una oportunidad.',streak:'🔥 Racha: {0} partidas esta sesión',countdown:'Prepárate',
   hookNear:'Solo te faltaron {0} puntos para tu récord.',hookCombo:'Tu mejor combo fue {0}×. ¿Puedes superarlo?',hookStreak:'Llevas {0} partidas. ¡No pares!',hookDefault:'El 80% de jugadores mejoran en la siguiente partida.',
   deltaUp:'▲ +{0} pts vs tu anterior',deltaDown:'▼ {0} pts vs tu anterior',deltaSame:'Misma puntuación que la anterior',
-  speedLbl:'Velocidad'
+  speedLbl:'Velocidad',
+  msTitle:'Elige tu experiencia',msSub:'Dos formas de jugar. El mismo Tetris.',msRetroT:'Modo Retro',msRetroD:'Experiencia clásica GameBoy. Paleta verde, estética pixel, nostalgia pura.',msModernT:'Modo Moderno',msModernD:'Efectos visuales, neon, partículas. La versión definitiva.',switchMode:'↔ Cambiar modo de juego'
 },
 en:{by:'by',tagline:'Seven pieces. Infinite decisions.<br>How many lines can you survive?',statHi:'High score',statGm:'Games',statLi:'Total lines',pickMode:'Choose your challenge',mMarathon:'Marathon',mMarathonD:'Survive. Climb. Dominate.',mSprint:'Sprint 40L',mSprintD:'40 lines. No excuses.',mUltra:'Ultra 2min',mUltraD:'120 seconds. Every block counts.',mBlitz:'Blitz 3min',mBlitzD:'Speed never forgives.',btnPlay:'Start game',btnManual:'Learn the controls',foot1:'A game by <a href="https://www.explicalia.com" target="_blank" rel="noopener">explicalia.com</a>',hudSc:'Score',hudLi:'Lines',hudLv:'Level',hudHi:'Record',hint:'swipe board · tap left/right to rotate · quick flick = hard drop',nearRec:'→ NEAR RECORD ←',pause:'Paused',pauseSc:'Current score',btnResume:'▶ &nbsp; Continue',btnQuit:'Quit game',goTitle:'GAME<br>OVER',goFinal:'Final score',goLi:'Lines',goLv:'Level',goHi:'Record',btnRetry:'Rematch',btnMenu:'Back to menu',btnPause:'⏸ &nbsp; PAUSE',fwTitle:'See you soon',fwBest:'Your all-time best score',btnOneMore:'One more',btnHome:'Back to home',manTitle:'How to play',btnStart:'Start playing',kMove:'move',kRot:'rotate',kPause:'pause',nrec:'✦ &nbsp; NEW RECORD &nbsp; ✦',timeLbl:'Time',
   challenge0:'Your story begins here.',challengeHi:'Can you beat {0} points?',challengeGen:'Every game is a chance.',streak:'🔥 Streak: {0} games this session',countdown:'Get ready',
   hookNear:'You were only {0} points from your record.',hookCombo:'Your best combo was {0}×. Can you beat it?',hookStreak:'{0} games and counting. Don\'t stop!',hookDefault:'80% of players improve on their next game.',
   deltaUp:'▲ +{0} pts vs previous',deltaDown:'▼ {0} pts vs previous',deltaSame:'Same score as before',
-  speedLbl:'Speed'
+  speedLbl:'Speed',
+  msTitle:'Choose your experience',msSub:'Two ways to play. Same Tetris.',msRetroT:'Retro Mode',msRetroD:'Classic GameBoy experience. Green palette, pixel aesthetic, pure nostalgia.',msModernT:'Modern Mode',msModernD:'Visual effects, neon, particles. The definitive version.',switchMode:'↔ Switch game mode'
 },
 fr:{by:'par',tagline:'Sept pièces. Décisions infinies.<br>Combien de lignes tiendrez-vous ?',statHi:'Record',statGm:'Parties',statLi:'Lignes totales',pickMode:'Choisis ton défi',mMarathon:'Marathon',mMarathonD:'Survis. Progresse. Domine.',mSprint:'Sprint 40L',mSprintD:'40 lignes. Sans excuses.',mUltra:'Ultra 2min',mUltraD:'120 secondes. Chaque bloc compte.',mBlitz:'Blitz 3min',mBlitzD:'La vitesse ne pardonne pas.',btnPlay:'Commencer',btnManual:'Maîtrise les contrôles',foot1:'Un jeu de <a href="https://www.explicalia.com" target="_blank" rel="noopener">explicalia.com</a>',hudSc:'Points',hudLi:'Lignes',hudLv:'Niveau',hudHi:'Record',hint:'glisse · touche gauche/droite pour tourner · flick rapide = hard drop',nearRec:'→ PRÈS DU RECORD ←',pause:'Pause',pauseSc:'Score actuel',btnResume:'▶ &nbsp; Continuer',btnQuit:'Quitter',goTitle:'GAME<br>OVER',goFinal:'Score final',goLi:'Lignes',goLv:'Niveau',goHi:'Record',btnRetry:'Revanche',btnMenu:'Retour au menu',btnPause:'⏸ &nbsp; PAUSE',fwTitle:'À bientôt',fwBest:'Ton meilleur score historique',btnOneMore:'Encore une',btnHome:'Retour à l\'accueil',manTitle:'Manuel de jeu',btnStart:'Commencer à jouer',kMove:'bouger',kRot:'tourner',kPause:'pause',nrec:'✦ &nbsp; NOUVEAU RECORD &nbsp; ✦',timeLbl:'Temps',
   challenge0:'Ton histoire commence ici.',challengeHi:'Peux-tu dépasser les {0} points ?',challengeGen:'Chaque partie est une opportunité.',streak:'🔥 Série : {0} parties cette session',countdown:'Prépare-toi',
   hookNear:'Il ne te manquait que {0} points pour ton record.',hookCombo:'Ton meilleur combo : {0}×. Tu peux mieux ?',hookStreak:'{0} parties d\'affilée. Continue !',hookDefault:'80% des joueurs s\'améliorent à la partie suivante.',
   deltaUp:'▲ +{0} pts vs précédent',deltaDown:'▼ {0} pts vs précédent',deltaSame:'Même score que le précédent',
-  speedLbl:'Vitesse'
+  speedLbl:'Vitesse',
+  msTitle:'Choisis ton expérience',msSub:'Deux façons de jouer. Le même Tetris.',msRetroT:'Mode Rétro',msRetroD:'Expérience GameBoy classique. Palette verte, esthétique pixel, nostalgie pure.',msModernT:'Mode Moderne',msModernD:'Effets visuels, néon, particules. La version définitive.',switchMode:'↔ Changer de mode'
 },
 it:{by:'di',tagline:'Sette pezzi. Decisioni infinite.<br>Quante linee resisti?',statHi:'Record',statGm:'Partite',statLi:'Linee totali',pickMode:'Scegli la tua sfida',mMarathon:'Maratona',mMarathonD:'Sopravvivi. Sali. Domina.',mSprint:'Sprint 40L',mSprintD:'40 linee. Nessuna scusa.',mUltra:'Ultra 2min',mUltraD:'120 secondi. Ogni blocco conta.',mBlitz:'Blitz 3min',mBlitzD:'La velocità non perdona.',btnPlay:'Inizia partita',btnManual:'Impara i controlli',foot1:'Un gioco di <a href="https://www.explicalia.com" target="_blank" rel="noopener">explicalia.com</a>',hudSc:'Punti',hudLi:'Linee',hudLv:'Livello',hudHi:'Record',hint:'scorri · tocca sinistra/destra per ruotare · flick rapido = hard drop',nearRec:'→ VICINO AL RECORD ←',pause:'Pausa',pauseSc:'Punteggio attuale',btnResume:'▶ &nbsp; Continua',btnQuit:'Esci',goTitle:'GAME<br>OVER',goFinal:'Punteggio finale',goLi:'Linee',goLv:'Livello',goHi:'Record',btnRetry:'Rivincita',btnMenu:'Torna al menu',btnPause:'⏸ &nbsp; PAUSA',fwTitle:'Alla prossima',fwBest:'Il tuo miglior punteggio di sempre',btnOneMore:'Ancora una',btnHome:'Torna all\'inizio',manTitle:'Manuale di gioco',btnStart:'Inizia a giocare',kMove:'muovi',kRot:'ruota',kPause:'pausa',nrec:'✦ &nbsp; NUOVO RECORD &nbsp; ✦',timeLbl:'Tempo',
   challenge0:'La tua storia inizia qui.',challengeHi:'Riesci a superare {0} punti?',challengeGen:'Ogni partita è un\'opportunità.',streak:'🔥 Serie: {0} partite questa sessione',countdown:'Preparati',
   hookNear:'Ti mancavano solo {0} punti per il record.',hookCombo:'Il tuo miglior combo è stato {0}×. Puoi superarlo?',hookStreak:'{0} partite di fila. Non fermarti!',hookDefault:'L\'80% dei giocatori migliora alla partita successiva.',
   deltaUp:'▲ +{0} pts vs precedente',deltaDown:'▼ {0} pts vs precedente',deltaSame:'Stesso punteggio di prima',
-  speedLbl:'Velocità'
+  speedLbl:'Velocità',
+  msTitle:'Scegli la tua esperienza',msSub:'Due modi di giocare. Lo stesso Tetris.',msRetroT:'Modo Retro',msRetroD:'Esperienza GameBoy classica. Palette verde, estetica pixel, nostalgia pura.',msModernT:'Modo Moderno',msModernD:'Effetti visivi, neon, particelle. La versione definitiva.',switchMode:'↔ Cambia modalità'
 },
 de:{by:'von',tagline:'Sieben Teile. Unendliche Entscheidungen.<br>Wie viele Linien schaffst du?',statHi:'Rekord',statGm:'Spiele',statLi:'Linien gesamt',pickMode:'Wähle deine Herausforderung',mMarathon:'Marathon',mMarathonD:'Überlebe. Steige auf. Dominiere.',mSprint:'Sprint 40L',mSprintD:'40 Linien. Keine Ausreden.',mUltra:'Ultra 2min',mUltraD:'120 Sekunden. Jeder Block zählt.',mBlitz:'Blitz 3min',mBlitzD:'Geschwindigkeit verzeiht nicht.',btnPlay:'Spiel starten',btnManual:'Steuerung lernen',foot1:'Ein Spiel von <a href="https://www.explicalia.com" target="_blank" rel="noopener">explicalia.com</a>',hudSc:'Punkte',hudLi:'Linien',hudLv:'Level',hudHi:'Rekord',hint:'wischen · tippe links/rechts zum Drehen · schneller Flick = Hard Drop',nearRec:'→ NAHE AM REKORD ←',pause:'Pause',pauseSc:'Aktueller Stand',btnResume:'▶ &nbsp; Weiter',btnQuit:'Spiel verlassen',goTitle:'GAME<br>OVER',goFinal:'Endstand',goLi:'Linien',goLv:'Level',goHi:'Rekord',btnRetry:'Revanche',btnMenu:'Zurück zum Menü',btnPause:'⏸ &nbsp; PAUSE',fwTitle:'Bis zum nächsten Mal',fwBest:'Dein historischer Bestwert',btnOneMore:'Noch eine',btnHome:'Zurück zum Start',manTitle:'Spielanleitung',btnStart:'Jetzt spielen',kMove:'bewegen',kRot:'drehen',kPause:'Pause',nrec:'✦ &nbsp; NEUER REKORD &nbsp; ✦',timeLbl:'Zeit',
   challenge0:'Deine Geschichte beginnt hier.',challengeHi:'Kannst du {0} Punkte schlagen?',challengeGen:'Jedes Spiel ist eine Chance.',streak:'🔥 Serie: {0} Spiele diese Sitzung',countdown:'Mach dich bereit',
   hookNear:'Dir fehlten nur {0} Punkte zum Rekord.',hookCombo:'Dein bester Combo war {0}×. Schaffst du mehr?',hookStreak:'{0} Spiele am Stück. Weiter so!',hookDefault:'80% der Spieler verbessern sich im nächsten Spiel.',
   deltaUp:'▲ +{0} Pkt. vs vorherig',deltaDown:'▼ {0} Pkt. vs vorherig',deltaSame:'Gleicher Stand wie zuvor',
-  speedLbl:'Tempo'
+  speedLbl:'Tempo',
+  msTitle:'Wähle dein Erlebnis',msSub:'Zwei Wege zu spielen. Dasselbe Tetris.',msRetroT:'Retro-Modus',msRetroD:'Klassisches GameBoy-Erlebnis. Grüne Palette, Pixel-Ästhetik, pure Nostalgie.',msModernT:'Moderner Modus',msModernD:'Visuelle Effekte, Neon, Partikel. Die definitive Version.',switchMode:'↔ Spielmodus wechseln'
 },
 ca:{by:'per',tagline:'Set peces. Decisions infinites.<br>Quantes línies aguantes?',statHi:'Rècord',statGm:'Partides',statLi:'Línies totals',pickMode:'Tria el teu desafiament',mMarathon:'Marató',mMarathonD:'Sobreviu. Puja. Domina.',mSprint:'Sprint 40L',mSprintD:'40 línies. Sense excuses.',mUltra:'Ultra 2min',mUltraD:'120 segons. Cada bloc compta.',mBlitz:'Blitz 3min',mBlitzD:'La velocitat no perdona.',btnPlay:'Començar partida',btnManual:'Domina els controls',foot1:'Un joc de <a href="https://www.explicalia.com" target="_blank" rel="noopener">explicalia.com</a>',hudSc:'Punts',hudLi:'Línies',hudLv:'Nivell',hudHi:'Rècord',hint:'llisca tauler · toca esq/dret per girar · flick ràpid = hard drop',nearRec:'→ A PROP DEL RÈCORD ←',pause:'Pausa',pauseSc:'Puntuació actual',btnResume:'▶ &nbsp; Continuar',btnQuit:'Sortir del joc',goTitle:'GAME<br>OVER',goFinal:'Puntuació final',goLi:'Línies',goLv:'Nivell',goHi:'Rècord',btnRetry:'Revenja',btnMenu:'Tornar al menú',btnPause:'⏸ &nbsp; PAUSA',fwTitle:'Fins la propera',fwBest:'La teva millor puntuació històrica',btnOneMore:'Una més',btnHome:'Tornar a l\'inici',manTitle:'Manual de joc',btnStart:'Començar a jugar',kMove:'moure',kRot:'girar',kPause:'pausa',nrec:'✦ &nbsp; NOU RÈCORD &nbsp; ✦',timeLbl:'Temps',
   challenge0:'La teva història comença aquí.',challengeHi:'Pots superar els {0} punts?',challengeGen:'Cada partida és una oportunitat.',streak:'🔥 Ratxa: {0} partides aquesta sessió',countdown:'Prepara\'t',
   hookNear:'Només et van faltar {0} punts pel teu rècord.',hookCombo:'El teu millor combo va ser {0}×. Pots superar-lo?',hookStreak:'{0} partides. No paris!',hookDefault:'El 80% de jugadors milloren a la partida següent.',
   deltaUp:'▲ +{0} pts vs anterior',deltaDown:'▼ {0} pts vs anterior',deltaSame:'Mateixa puntuació que l\'anterior',
-  speedLbl:'Velocitat'
+  speedLbl:'Velocitat',
+  msTitle:'Tria la teva experiència',msSub:'Dues formes de jugar. El mateix Tetris.',msRetroT:'Mode Retro',msRetroD:'Experiència GameBoy clàssica. Paleta verda, estètica píxel, nostàlgia pura.',msModernT:'Mode Modern',msModernD:'Efectes visuals, neó, partícules. La versió definitiva.',switchMode:'↔ Canviar mode de joc'
 }
 };
 
@@ -2363,6 +2830,41 @@ var I18N = {
 
 /* Load saved language */
 try { var savedLang = localStorage.getItem('ex_lang'); if (savedLang && T[savedLang]) LANG = savedLang; } catch(e) {}
+
+/* ══════════════════════════════════════════
+   SKIN SYSTEM — Retro / Modern
+   ══════════════════════════════════════════ */
+var SKIN_MODE = 'modern';
+var PC_MODERN, PG_MODERN, PC_RETRO, PG_RETRO;
+
+var SKIN = {
+  set: function(mode) {
+    SKIN_MODE = mode;
+    var app = document.getElementById('app');
+    if (!app) return;
+    if (mode === 'retro') {
+      app.classList.add('skin-retro');
+      PC.I = '#9bbc0f'; PC.O = '#8bac0f'; PC.T = '#6a8c00'; PC.S = '#9bbc0f';
+      PC.Z = '#306230'; PC.J = '#8bac0f'; PC.L = '#6a8c00';
+      PG.I = 'rgba(155,188,15,.7)'; PG.O = 'rgba(139,172,15,.7)'; PG.T = 'rgba(106,140,0,.7)';
+      PG.S = 'rgba(155,188,15,.7)'; PG.Z = 'rgba(48,98,48,.7)'; PG.J = 'rgba(139,172,15,.7)'; PG.L = 'rgba(106,140,0,.7)';
+    } else {
+      app.classList.remove('skin-retro');
+      PC.I='#00E5FF'; PC.O='#FFEA00'; PC.T='#D500F9'; PC.S='#00E676'; PC.Z='#FF1744'; PC.J='#2979FF'; PC.L='#FF9100';
+      PG.I='rgba(0,229,255,0.85)'; PG.O='rgba(255,234,0,0.85)'; PG.T='rgba(213,0,249,0.85)'; PG.S='rgba(0,230,118,0.85)';
+      PG.Z='rgba(255,23,68,0.85)'; PG.J='rgba(41,121,255,0.85)'; PG.L='rgba(255,145,0,0.85)';
+    }
+    try { localStorage.setItem('ex_skin', mode); } catch(e) {}
+    go('s1');
+    if (typeof refreshLanding === 'function') refreshLanding();
+  },
+  showSelector: function() {
+    go('s0');
+  }
+};
+
+/* Load saved skin */
+try { var savedSkin = localStorage.getItem('ex_skin'); if (savedSkin === 'retro' || savedSkin === 'modern') SKIN_MODE = savedSkin; } catch(e) {}
 
 const COLS = 10, ROWS = 20;
 
@@ -2534,7 +3036,7 @@ const DROPS = (() => {
 })();
 
 /* ── Screen router ── */
-let CUR = 's1';
+let CUR = 's0';
 function go(id) {
   const prev = document.getElementById(CUR);
   const next = document.getElementById(id);
@@ -2622,6 +3124,16 @@ const UI = {
     if (fwQ) fwQ.textContent = fw.q;
     const h = DB.hi();
     if (fwH) fwH.textContent = h > 0 ? h.toLocaleString() : '\u2014';
+    /* v9: Exit splash before farewell */
+    try {
+      var es = document.getElementById('exit-splash');
+      if (es) {
+        es.classList.add('show');
+        setTimeout(function() { es.classList.add('out'); }, 1200);
+        setTimeout(function() { es.classList.remove('show','out'); go('s6'); }, 1600);
+        return;
+      }
+    } catch(e) {}
     go('s6');
   },
   toLanding() { rainOn = true; refreshLanding(); go('s1'); }
@@ -3354,12 +3866,24 @@ class Engine {
   _dc(ctx, px, py, type) {
     const s = CELL - 1;
     if (type === 'X') {
-      ctx.fillStyle = 'rgba(255,255,255,.88)';
+      ctx.fillStyle = SKIN_MODE === 'retro' ? '#9bbc0f' : 'rgba(255,255,255,.88)';
       ctx.fillRect(px, py, s, s);
       return;
     }
     const col = PC[type] || '#888';
     const gl = PG[type] || 'rgba(255,255,255,.5)';
+    /* Retro: flat pixel blocks */
+    if (SKIN_MODE === 'retro') {
+      ctx.fillStyle = col;
+      ctx.fillRect(px + .5, py + .5, s - 1, s - 1);
+      ctx.fillStyle = adj(col, .2);
+      ctx.fillRect(px + 1, py + 1, s - 3, 2);
+      ctx.fillRect(px + 1, py + 1, 2, s - 3);
+      ctx.strokeStyle = adj(col, -.3);
+      ctx.lineWidth = 1;
+      ctx.strokeRect(px + .5, py + .5, s - 1, s - 1);
+      return;
+    }
     ctx.shadowColor = gl;
     ctx.shadowBlur = CELL * .5;
     const g = ctx.createLinearGradient(px, py, px, py + s);
@@ -3380,9 +3904,9 @@ class Engine {
   _brd(board) {
     if (!gCtx || !gCvs) return;
     const w = gCvs.width, h = gCvs.height;
-    gCtx.fillStyle = 'rgba(0,0,0,.58)';
+    gCtx.fillStyle = SKIN_MODE === 'retro' ? '#0f380f' : 'rgba(0,0,0,.58)';
     gCtx.fillRect(0, 0, w, h);
-    gCtx.strokeStyle = 'rgba(255,255,255,.03)';
+    gCtx.strokeStyle = SKIN_MODE === 'retro' ? '#1a4a1a' : 'rgba(255,255,255,.03)';
     gCtx.lineWidth = .5;
     for (let r = 0; r <= ROWS; r++) { gCtx.beginPath(); gCtx.moveTo(0, r * CELL); gCtx.lineTo(w, r * CELL); gCtx.stroke(); }
     for (let c = 0; c <= COLS; c++) { gCtx.beginPath(); gCtx.moveTo(c * CELL, 0); gCtx.lineTo(c * CELL, h); gCtx.stroke(); }
@@ -3403,9 +3927,9 @@ class Engine {
       if (gr >= 0 && gr < ROWS && gc >= 0 && gc < COLS && gr !== (r + this.piece.y)) {
         const s = CELL - 1;
         const rad = Math.max(2, CELL * .1);
-        gCtx.strokeStyle = 'rgba(255,255,255,.18)';
+        gCtx.strokeStyle = SKIN_MODE === 'retro' ? 'rgba(139,172,15,.3)' : 'rgba(255,255,255,.18)';
         gCtx.lineWidth = 1;
-        gCtx.fillStyle = 'rgba(255,255,255,.05)';
+        gCtx.fillStyle = SKIN_MODE === 'retro' ? 'rgba(139,172,15,.08)' : 'rgba(255,255,255,.05)';
         gCtx.beginPath(); gCtx.roundRect(gc * CELL + .5, gr * CELL + .5, s - 1, s - 1, rad);
         gCtx.fill(); gCtx.stroke();
       }
@@ -3596,6 +4120,13 @@ class Engine {
     bind('bt-rl', () => this.tryRot(-1));
     bind('bt-hd', () => this.hardDrop());
     bind('bt-hl', () => this.hold());
+    /* GB pad bindings */
+    bind('gb-le', () => this.move(-1), true);
+    bind('gb-ri', () => this.move(1), true);
+    bind('gb-dn', () => this.softDrop(), true);
+    bind('gb-rr', () => this.tryRot(1));
+    bind('gb-hd', () => this.hardDrop());
+    bind('gb-hl', () => this.hold());
 
     // Keyboard
     const held = {};
@@ -3672,6 +4203,21 @@ try {
 
 /* Apply saved language */
 I18N.set(LANG);
+
+/* Apply saved skin or show selector */
+if (SKIN_MODE !== 'modern') {
+  /* Has saved retro skin — apply silently and skip to s1 */
+  var app = document.getElementById('app');
+  if (app) app.classList.add('skin-retro');
+  PC.I='#9bbc0f';PC.O='#8bac0f';PC.T='#6a8c00';PC.S='#9bbc0f';PC.Z='#306230';PC.J='#8bac0f';PC.L='#6a8c00';
+  PG.I='rgba(155,188,15,.7)';PG.O='rgba(139,172,15,.7)';PG.T='rgba(106,140,0,.7)';PG.S='rgba(155,188,15,.7)';PG.Z='rgba(48,98,48,.7)';PG.J='rgba(139,172,15,.7)';PG.L='rgba(106,140,0,.7)';
+  go('s1');
+} else {
+  try {
+    var hasSkin = localStorage.getItem('ex_skin');
+    if (hasSkin) { go('s1'); } /* Already chose modern before, skip selector */
+  } catch(e) {}
+}
 
 /* ── Splash Screen Controller ── */
 (function() {

@@ -20,7 +20,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════════
-   TETRIS · EXPLICALIA — v9.1 GameBoy + Branding Edition
+   TETRIS · EXPLICALIA — v10.0 Final Polish
    Full responsive: iPhone SE → Desktop 4K
    Copywriting · Engagement loops · Desktop layout
    ═══════════════════════════════════════════════════ */
@@ -148,6 +148,17 @@ background: radial-gradient(ellipse at 50% 40%, rgba(0, 122, 255, .18), transpar
 transition: opacity .06s;
 }
 #lf.on { opacity: 1; }
+/* Brand transition flash */
+#bf {
+position: fixed; inset: 0; z-index: 898;
+pointer-events: none; opacity: 0;
+background: radial-gradient(ellipse at 50% 50%, rgba(209,167,81,.1), transparent 70%);
+transition: opacity .15s;
+}
+#bf.on { opacity: 1; }
+/* Logo scale-in on landing */
+.logo-box { animation: logoIn .5s var(–spring) both; }
+@keyframes logoIn { from { transform: scale(.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
 /* ══════════════════════════════════════════
 SCREEN SYSTEM
@@ -1442,6 +1453,10 @@ margin-right: auto;
 .gside { width: 72px; }
 .pcard { max-width: 340px; }
 .m-sheet { max-width: 600px; margin: 0 auto; border-radius: 24px 24px 0 0; }
+.mod-dpad { –md: 52px; }
+.ma { width: 62px; height: 62px; font-size: 1.3rem; }
+.gb-dpad { –gd: 46px; }
+.gbb { width: 52px; height: 52px; }
 }
 
 /* Large tablets — iPad Pro (≥1024px) */
@@ -1860,88 +1875,76 @@ letter-spacing: 1.5px; text-transform: uppercase; color: rgba(209,167,81,.2);
 }
 
 /* ══════════════════════════════════════════
-SNES CONTROLLER (Modern mode)
+MODERN CONTROLS (v10 — intuitive touch)
 ══════════════════════════════════════════ */
-.snes-pad {
+.mod-pad {
 display: flex; align-items: center; justify-content: space-between;
-padding: clamp(6px, 1.5vmin, 10px) clamp(8px, 2vmin, 14px);
-background: linear-gradient(180deg, rgb(22,22,38), rgb(14,14,26));
-border-top: 1px solid rgb(36,36,56);
-border-radius: 24px 24px 0 0;
-margin: 0 clamp(4px, 1vmin, 8px);
+padding: clamp(6px, 1.5vmin, 10px) clamp(10px, 2.5vmin, 16px);
 }
-/* SNES D-pad */
-.snes-dpad {
-–sd: clamp(42px, 10.5vmin, 50px);
+/* D-pad (left) — connected cross */
+.mod-dpad {
+–md: clamp(44px, 11vmin, 54px);
 display: grid;
-grid-template-columns: var(–sd) var(–sd) var(–sd);
-grid-template-rows: var(–sd) var(–sd) var(–sd);
+grid-template-columns: var(–md) var(–md) var(–md);
+grid-template-rows: var(–md) var(–md) var(–md);
 flex-shrink: 0;
 }
-.sd {
-background: rgb(28,28,46);
+.md {
+background: rgb(28,28,48);
 border: 1px solid rgb(38,38,58);
 color: rgba(255,255,255,.5);
-font-size: clamp(.75rem, 2vmin, .92rem);
+font-size: clamp(.78rem, 2.1vmin, .95rem);
 font-family: var(–f-body);
 display: flex; align-items: center; justify-content: center;
 cursor: pointer; -webkit-user-select: none; user-select: none;
 padding: 0; border-radius: 0;
 transition: background .06s;
 }
-.sd:active { background: rgb(48,48,72); }
-.sd-u { grid-column: 2; grid-row: 1; border-radius: 12px 12px 0 0; border-bottom: none; }
-#bt-hl.sd { background: linear-gradient(180deg, #4A2880, #321860); color: rgba(255,255,255,.8); font-size: clamp(.58rem, 1.5vmin, .7rem); font-weight: 800; letter-spacing: 1px; border-color: rgba(107,53,217,.3); }
-#bt-hl.sd:active { background: linear-gradient(180deg, #5A32A0, #3A1870); }
-.sd-l { grid-column: 1; grid-row: 2; border-radius: 12px 0 0 12px; border-right: none; }
-.sd-r { grid-column: 3; grid-row: 2; border-radius: 0 12px 12px 0; border-left: none; }
-.sd-d { grid-column: 2; grid-row: 3; border-radius: 0 0 12px 12px; border-top: none; }
-.sd-c { grid-column: 2; grid-row: 2; background: rgb(22,22,38); border: 1px solid rgb(32,32,50); }
-/* SNES center labels */
-.snes-mid {
-display: flex; flex-direction: column; align-items: center; gap: clamp(4px, 1vmin, 6px);
+.md:active { background: rgb(50,50,76); }
+.md-u { grid-column: 2; grid-row: 1; border-radius: 14px 14px 0 0; border-bottom: none; }
+.md-l { grid-column: 1; grid-row: 2; border-radius: 14px 0 0 14px; border-right: none; }
+.md-r { grid-column: 3; grid-row: 2; border-radius: 0 14px 14px 0; border-left: none; }
+.md-d { grid-column: 2; grid-row: 3; border-radius: 0 0 14px 14px; border-top: none; }
+.md-c { grid-column: 2; grid-row: 2; background: rgb(22,22,40); border: 1px solid rgb(30,30,50); }
+/* HOLD button — purple accent on D-pad up */
+.md-hold {
+background: linear-gradient(180deg, #5A30B0, #3A1880);
+color: rgba(255,255,255,.85);
+font-size: clamp(.58rem, 1.5vmin, .7rem);
+font-weight: 800; letter-spacing: 1px;
+border-color: rgba(90,48,176,.4);
 }
-.snes-lbl {
-font-family: var(–f-body); font-size: clamp(.42rem, 1.1vmin, .52rem);
-letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.15);
-}
-.snes-sel, .snes-sta {
-width: clamp(28px, 7vmin, 34px); height: clamp(12px, 3vmin, 15px);
-border-radius: 8px; border: none; cursor: pointer;
-background: rgb(36,36,54); color: rgba(255,255,255,.3);
-font-size: clamp(.38rem, 1vmin, .46rem); font-family: var(–f-body);
-letter-spacing: 1px; text-transform: uppercase;
-display: flex; align-items: center; justify-content: center;
-}
-.snes-sta:active, .snes-sel:active { background: rgb(50,50,70); }
-/* SNES action buttons (4 diamond) */
-.snes-btns {
-–sb: clamp(42px, 10.5vmin, 50px);
-display: grid;
-grid-template-columns: var(–sb) calc(var(–sb) * .3) var(–sb);
-grid-template-rows: var(–sb) calc(var(–sb) * .3) var(–sb);
+.md-hold:active { background: linear-gradient(180deg, #6A3CC0, #4A2090); }
+/* Action buttons (right) — 3 large circles, row layout */
+.mod-acts {
+display: flex; align-items: center;
+gap: clamp(8px, 2vmin, 12px);
 flex-shrink: 0;
 }
-.sb {
+.ma {
+width: clamp(52px, 13vmin, 64px); height: clamp(52px, 13vmin, 64px);
 border: none; border-radius: 50%;
-font-weight: 800; font-size: clamp(.72rem, 2vmin, .88rem);
-font-family: var(–f-display);
+color: #fff; font-weight: 800;
+font-size: clamp(1.1rem, 3vmin, 1.4rem);
+font-family: var(–f-body);
 display: flex; align-items: center; justify-content: center;
 cursor: pointer; -webkit-user-select: none; user-select: none;
 position: relative;
-box-shadow: 0 3px 0 rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.12);
+box-shadow: 0 4px 0 rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.12);
 transition: transform .06s, box-shadow .06s;
 }
-.sb::before {
+.ma::before {
 content: ‘’; position: absolute; inset: 0; border-radius: 50%;
 background: linear-gradient(to bottom, rgba(255,255,255,.14), transparent 50%);
 pointer-events: none;
 }
-.sb:active { transform: translateY(3px); box-shadow: 0 0 0 transparent; }
-.sb-x { grid-column: 2; grid-row: 1; background: linear-gradient(135deg, #6B6BD0, #4A4AA0); color: rgba(255,255,255,.9); }
-.sb-y { grid-column: 1; grid-row: 2; background: linear-gradient(135deg, #4A8F4A, #2A6A2A); color: rgba(255,255,255,.9); }
-.sb-a { grid-column: 3; grid-row: 2; background: linear-gradient(135deg, #D4A017, #B8860B); color: #fff; box-shadow: 0 3px 0 rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.15), 0 0 12px rgba(209,167,81,.2); }
-.sb-b { grid-column: 2; grid-row: 3; background: linear-gradient(135deg, #C04040, #8B2020); color: rgba(255,255,255,.9); }
+.ma:active { transform: translateY(4px); box-shadow: 0 0 0 transparent; }
+.ma-rl { background: linear-gradient(135deg, #1E5A8F, #0F3460); }
+.ma-rr { background: linear-gradient(135deg, #1E5A8F, #0F3460); }
+.ma-hd {
+background: linear-gradient(135deg, #D4A017, #B8860B);
+box-shadow: 0 4px 0 rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.15), 0 0 16px rgba(209,167,81,.2);
+}
 
 /* ══════════════════════════════════════════
 GAMEBOY RETRO SKIN
@@ -1952,28 +1955,28 @@ GAMEBOY RETRO SKIN
 –gb-light: #8bac0f;
 –gb-lightest: #9bbc0f;
 }
-/* Retro background */
-.skin-retro #s1 { background: linear-gradient(180deg, #1a1a10, #0f0f08); }
-.skin-retro #s3 { background: #0a0a06; }
-.skin-retro #s5 { background: radial-gradient(ellipse at 50% 0%, #1a1208, #0a0a06 100%); }
-.skin-retro #s6 { background: radial-gradient(ellipse at 50% 100%, #0a120a, #0a0a06 60%); }
+/* Retro background — lighter, more GB-LCD feel */
+.skin-retro #s1 { background: linear-gradient(180deg, #1a1e12, #101408); }
+.skin-retro #s3 { background: #0e1008; }
+.skin-retro #s5 { background: radial-gradient(ellipse at 50% 0%, #1e1a08, #0e1008 100%); }
+.skin-retro #s6 { background: radial-gradient(ellipse at 50% 100%, #0e160a, #0e1008 60%); }
 
-/* GB casing around board */
+/* GB casing around board — stronger border, visible LCD frame */
 .skin-retro #board {
-border: 3px solid #4a5a2a;
+border: 3px solid #5a6a32;
 border-radius: 4px;
-box-shadow: inset 0 0 20px rgba(0,0,0,.8), 0 0 0 6px #1a1a10, 0 0 0 7px #3a4a20;
+box-shadow: inset 0 0 24px rgba(0,0,0,.7), 0 0 0 5px #16180e, 0 0 0 7px #4a5a28;
 }
-/* HUD retro */
-.skin-retro .hp { background: rgb(18,22,12); border-color: rgb(30,38,20); }
-.skin-retro #hsc .hp-v { color: var(–gb-lightest); }
-.skin-retro #hli .hp-v { color: var(–gb-light); }
-.skin-retro #hlv .hp-v { color: var(–gb-lightest); }
-.skin-retro #hhi .hp-v { color: var(–gb-light); }
-.skin-retro .hp-l { color: rgba(139,172,15,.5); }
-/* HOLD/NEXT retro */
-.skin-retro .gbox { background: rgb(14,18,10); border-color: rgb(28,36,18); }
-.skin-retro .gbl { color: rgba(139,172,15,.4); }
+/* HUD retro — higher contrast */
+.skin-retro .hp { background: rgb(20,26,14); border-color: rgb(40,50,26); }
+.skin-retro #hsc .hp-v { color: #9bbc0f; }
+.skin-retro #hli .hp-v { color: #9bbc0f; }
+.skin-retro #hlv .hp-v { color: #8bac0f; }
+.skin-retro #hhi .hp-v { color: #8bac0f; }
+.skin-retro .hp-l { color: rgba(155,188,15,.6); }
+/* HOLD/NEXT retro — visible */
+.skin-retro .gbox { background: rgb(18,24,12); border-color: rgb(42,54,28); }
+.skin-retro .gbl { color: rgba(155,188,15,.55); }
 /* Brand title retro */
 .skin-retro .brand-t {
 background: linear-gradient(135deg, #8bac0f, #9bbc0f, #6a8c00);
@@ -1981,32 +1984,37 @@ background: linear-gradient(135deg, #8bac0f, #9bbc0f, #6a8c00);
 }
 .skin-retro .sys-dot { background: #8bac0f; box-shadow: 0 0 7px #8bac0f; }
 /* Landing stats retro */
-.skin-retro .ls { background: rgb(14,18,10); border-color: rgb(28,36,18); }
+.skin-retro .ls { background: rgb(18,24,12); border-color: rgb(42,54,28); }
 .skin-retro .ls-v { color: #9bbc0f !important; }
-.skin-retro .ls-l { color: rgba(139,172,15,.4); }
+.skin-retro .ls-l { color: rgba(155,188,15,.5); }
 /* Buttons retro */
 .skin-retro .btn {
-background: linear-gradient(135deg, #4a6a10, #2a4a00);
-box-shadow: 0 2px 0 rgba(255,255,255,.1) inset, 0 6px 18px rgba(74,90,42,.3);
+background: linear-gradient(135deg, #5a7a14, #3a5a04);
+box-shadow: 0 2px 0 rgba(255,255,255,.08) inset, 0 6px 18px rgba(74,90,42,.35);
 }
-.skin-retro .btn.ghost { background: rgb(18,22,12); border-color: rgb(38,48,26); color: rgba(139,172,15,.6); }
-.skin-retro .btn.red { background: linear-gradient(135deg, #6a3a10, #4a2a00); }
-.skin-retro .btn.green { background: linear-gradient(135deg, #4a6a10, #2a4a00); }
+.skin-retro .btn.ghost { background: rgb(20,26,14); border-color: rgb(44,56,30); color: rgba(155,188,15,.65); }
+.skin-retro .btn.red { background: linear-gradient(135deg, #7a4a14, #5a3a08); }
+.skin-retro .btn.green { background: linear-gradient(135deg, #5a7a14, #3a5a04); }
 /* Mode cards retro */
-.skin-retro .mc.on { background: rgba(139,172,15,.1); border-color: rgba(139,172,15,.3); }
-.skin-retro .mc .mn { color: rgba(139,172,15,.7); }
+.skin-retro .mc.on { background: rgba(155,188,15,.12); border-color: rgba(155,188,15,.35); }
+.skin-retro .mc .mn { color: rgba(155,188,15,.7); }
 .skin-retro .mc.on .mn { color: #9bbc0f; }
-/* Game Over retro */
-.skin-retro .go-t { color: #8bac0f; text-shadow: 0 0 30px rgba(139,172,15,.3); }
-.skin-retro .go-sb { background: rgb(14,18,10); border-color: rgb(38,48,26); }
-.skin-retro .go-s { background: rgb(12,16,8); border-color: rgb(28,36,18); }
-.skin-retro .go-quote-card { background: rgb(14,18,10); border-color: rgb(28,36,18); }
+.skin-retro .mc .md { color: rgba(155,188,15,.3); }
+.skin-retro .mc { border-color: rgb(34,44,22); }
+/* Game Over retro — high contrast */
+.skin-retro .go-t { color: #9bbc0f; text-shadow: 0 0 30px rgba(155,188,15,.35); }
+.skin-retro .go-sb { background: rgb(18,24,12); border-color: rgb(48,60,30); }
+.skin-retro .go-s { background: rgb(16,22,10); border-color: rgb(40,52,26); }
+.skin-retro .go-quote-card { background: rgb(18,24,12); border-color: rgb(40,52,26); }
 .skin-retro .go-sv { color: #9bbc0f !important; }
-.skin-retro #nrec { color: #9bbc0f; text-shadow: 0 0 12px rgba(155,188,15,.5); }
+.skin-retro .go-sl { color: rgba(155,188,15,.5); }
+.skin-retro .gl { color: rgba(155,188,15,.45); }
+.skin-retro #nrec { color: #9bbc0f; text-shadow: 0 0 14px rgba(155,188,15,.5); }
 /* Farewell retro */
-.skin-retro .fw-t { color: #8bac0f; text-shadow: 0 0 30px rgba(139,172,15,.3); }
-.skin-retro .fw-hb { background: rgb(12,18,10); border-color: rgb(28,40,20); }
+.skin-retro .fw-t { color: #9bbc0f; text-shadow: 0 0 30px rgba(155,188,15,.35); }
+.skin-retro .fw-hb { background: rgb(16,24,12); border-color: rgb(42,56,28); }
 .skin-retro .fw-hv { color: #9bbc0f; }
+.skin-retro .fw-hl { color: rgba(155,188,15,.45); }
 /* Pause retro */
 .skin-retro .pcard { background: rgb(14,18,10); border-color: rgb(38,48,26); }
 .skin-retro .pt { color: #8bac0f; text-shadow: 0 0 20px rgba(139,172,15,.3); }
@@ -2138,10 +2146,10 @@ background: rgb(52,54,46); border-radius: 1px;
 
 /* Skin visibility toggles */
 .skin-retro .gb-pad { display: flex; }
-.skin-retro .snes-pad { display: none; }
+.skin-retro .mod-pad { display: none; }
 .skin-retro .snes-mid-row { display: none; }
 .skin-retro .gb-ss { display: flex; }
-.snes-pad { display: flex; }
+.mod-pad { display: flex; }
 .gb-pad { display: none; }
 .gb-ss { display: none; }
 .snes-mid-row { display: flex; justify-content: center; padding: clamp(2px, .5vmin, 4px) 0; }
@@ -2238,6 +2246,7 @@ animation: fUp .4s var(–ease-out) .75s both;
   <div class="orb" style="width:200px;height:200px;top:42%;left:16%;background:radial-gradient(circle,rgba(0,150,200,.18),transparent 70%);animation-duration:20s;animation-delay:-6s;opacity:.38;"></div>
 </div>
 <div id="lf" aria-hidden="true"></div>
+<div id="bf" aria-hidden="true"></div>
 
 <!-- Landscape warning -->
 
@@ -2521,27 +2530,19 @@ animation: fUp .4s var(–ease-out) .75s both;
   </div>
 
   <div id="gctrl">
-    <!-- SNES Controller (Modern mode) -->
-    <div class="snes-pad">
-      <div class="snes-dpad">
-        <button class="sd sd-u" id="bt-hl" aria-label="Hold">H</button>
-        <button class="sd sd-l" id="bt-le" aria-label="←">◀</button>
-        <div class="sd-c"></div>
-        <button class="sd sd-r" id="bt-ri" aria-label="→">▶</button>
-        <button class="sd sd-d" id="bt-dn" aria-label="↓">▼</button>
+    <!-- Modern Controls (v10 — intuitive touch) -->
+    <div class="mod-pad">
+      <div class="mod-dpad">
+        <button class="md md-u md-hold" id="bt-hl" aria-label="Hold">H</button>
+        <button class="md md-l" id="bt-le" aria-label="←">◀</button>
+        <div class="md-c"></div>
+        <button class="md md-r" id="bt-ri" aria-label="→">▶</button>
+        <button class="md md-d" id="bt-dn" aria-label="↓">▼</button>
       </div>
-      <div class="snes-mid">
-        <div class="snes-lbl">Explicalia</div>
-        <div style="display:flex;gap:8px;">
-          <button class="snes-sel" aria-label="Select">···</button>
-          <button class="snes-sta" onclick="G&&G.pause()" aria-label="Pause">≡</button>
-        </div>
-      </div>
-      <div class="snes-btns">
-        <button class="sb sb-x" id="bt-hd" aria-label="Hard drop">X</button>
-        <button class="sb sb-y" id="bt-rl" aria-label="Rotar CCW">Y</button>
-        <button class="sb sb-a" id="bt-rr" aria-label="Rotar CW">A</button>
-        <button class="sb sb-b" aria-label="Noop"></button>
+      <div class="mod-acts">
+        <button class="ma ma-rl" id="bt-rl" aria-label="Rotar CCW">↺</button>
+        <button class="ma ma-hd" id="bt-hd" aria-label="Hard drop">⬇</button>
+        <button class="ma ma-rr" id="bt-rr" aria-label="Rotar CW">↻</button>
       </div>
     </div>
     <!-- GameBoy Controller (Retro mode — accurate replica) -->
@@ -3045,6 +3046,13 @@ function go(id) {
   CUR = id;
   const sw = next ? next.querySelector('.sw') : null;
   if (sw) sw.scrollTop = 0;
+  /* v10: Brand micro-flash on key transitions */
+  try {
+    if (id === 's1' || id === 's5' || id === 's6') {
+      var bf = document.getElementById('bf');
+      if (bf) { bf.classList.add('on'); setTimeout(function() { bf.classList.remove('on'); }, 200); }
+    }
+  } catch(e) {}
 }
 
 /* ── Landing stats ── */
